@@ -1,5 +1,13 @@
 ﻿# PlatformKit.Extensions.OperatingSystem
 
+
+## About
+
+PlatformKit.Extensions.OperatingSystem adds Windows, macOS, Linux, and FreeBSD detection methods to the System.OperatingSystem class via extension methods.
+
+This can be added to any .NET Standard 2.0 project.
+
+
 ## Usage
 To replace the existing OperatingSystem class in .NET Standard 2 with this one, use this in your using namespaces:
 
@@ -8,12 +16,6 @@ To replace the existing OperatingSystem class in .NET Standard 2 with this one, 
     using OperatingSystem = PlatformKit.Extensions.OperatingSystem.OperatingSystemExtension;
 #endif
 ```
-
-## About
-
-PlatformKit.Extensions.OperatingSystem adds Windows, macOS, Linux, and FreeBSD detection methods to the System.OperatingSystem class via extension methods.
-
-This can be added to any .NET Standard 2.0 project.
 
 ## Compatibility
 The following tables indicate Operating Systems that have detection methods in this library.
