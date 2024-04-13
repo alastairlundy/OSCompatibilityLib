@@ -26,14 +26,14 @@ using System;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
-    public static class GetSystemExtension
+    internal static class GetSystemExtension
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="platformId"></param>
         /// <returns></returns>
-        public static System.OperatingSystem GetSystem(PlatformID platformId)
+        internal static System.OperatingSystem GetSystem(PlatformID platformId)
         {
             return new System.OperatingSystem(platformId, Environment.OSVersion.Version);
         }

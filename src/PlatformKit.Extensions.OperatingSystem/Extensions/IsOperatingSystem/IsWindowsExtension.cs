@@ -27,15 +27,15 @@ using System.Runtime.InteropServices;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
-    public static class IsWindowsExtension
+    internal static class IsWindowsExtension
     {
         /// <summary>
         /// Returns whether the operating system that is running is Windows.
         /// </summary>
         /// <returns></returns>
-        public static bool IsWindows()
+        internal static bool IsWindows()
         {
-            return  GetSystemExtension.GetSystem(PlatformID.Win32NT).IsWindows();
+            return IsWindows( GetSystemExtension.GetSystem(PlatformID.Win32NT));
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// </summary>
         /// <param name="operatingSystem"></param>
         /// <returns></returns>
-        public static bool IsWindows(this System.OperatingSystem operatingSystem)
+        internal static bool IsWindows(this System.OperatingSystem operatingSystem)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         }

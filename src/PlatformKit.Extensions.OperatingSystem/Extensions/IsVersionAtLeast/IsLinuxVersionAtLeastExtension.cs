@@ -27,7 +27,7 @@ using AlastairLundy.System.Extensions.VersionExtensions;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
-    public static class IsLinuxVersionAtLeastExtension
+    internal static class IsLinuxVersionAtLeastExtension
     {
         /// <summary>
         /// Checks to see whether the specified version of Linux is the same or newer than the installed version of Windows.
@@ -38,7 +38,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <param name="revision"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public static bool IsLinuxVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        internal static bool IsLinuxVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
             if (IsLinuxExtension.IsLinux())
             {

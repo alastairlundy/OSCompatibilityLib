@@ -28,7 +28,7 @@ using AlastairLundy.System.Extensions.VersionExtensions;
 namespace PlatformKit.Extensions.OperatingSystem
 {
     // ReSharper disable once InconsistentNaming
-    public static class IsFreeBSDVersionAtLeastExtension
+    internal static class IsFreeBSDVersionAtLeastExtension
     {
         /// <summary>
         /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of Windows.

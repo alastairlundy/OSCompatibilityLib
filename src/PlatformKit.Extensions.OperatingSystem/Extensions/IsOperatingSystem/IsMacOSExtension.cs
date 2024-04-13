@@ -28,25 +28,15 @@ using System.Runtime.InteropServices;
 namespace PlatformKit.Extensions.OperatingSystem
 {
     // ReSharper disable once InconsistentNaming
-    public static class IsMacOSExtension
+    internal class IsMacOSExtension
     {
-        /// <summary>
-        /// Returns whether the operating system that is running is macOS.
-        /// </summary>
-        /// <returns></returns>
-        // ReSharper disable once InconsistentNaming
-        public static bool IsMacOS()
-        {
-            return GetSystemExtension.GetSystem(PlatformID.MacOSX).IsMacOS();
-        }
-
         /// <summary>
         /// Returns whether the operating system that is running is macOS.
         /// </summary>
         /// <param name="operatingSystem"></param>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
-        public static bool IsMacOS(this System.OperatingSystem operatingSystem)
+        internal static bool IsMacOS()
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
         }

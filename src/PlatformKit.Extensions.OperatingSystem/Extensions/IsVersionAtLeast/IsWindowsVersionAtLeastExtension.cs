@@ -5,7 +5,7 @@ using PlatformKit.Extensions.OperatingSystem;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
-    public static class IsWindowsVersionAtLeastExtension
+    internal static class IsWindowsVersionAtLeastExtension
     {
         /// <summary>
         /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
@@ -16,7 +16,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <param name="revision"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public static bool IsWindowsVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        internal static bool IsWindowsVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
             if (IsWindowsExtension.IsWindows())
             {

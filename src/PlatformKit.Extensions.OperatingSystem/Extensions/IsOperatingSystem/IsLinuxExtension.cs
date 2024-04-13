@@ -28,23 +28,13 @@ using System.Runtime.InteropServices;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
-    public static class IsLinuxExtension
+    internal class IsLinuxExtension
     {
-        /// <summary>
-        /// Returns whether the operating system that is running is Linux.
-        /// </summary>
-        /// <returns></returns>
-        public static bool IsLinux()
-        {
-            return GetSystemExtension.GetSystem(PlatformID.Unix).IsLinux();
-        }
-
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="operatingSystem"></param>
         /// <returns></returns>
-        public static bool IsLinux(this System.OperatingSystem operatingSystem)
+        internal static bool IsLinux()
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
         }

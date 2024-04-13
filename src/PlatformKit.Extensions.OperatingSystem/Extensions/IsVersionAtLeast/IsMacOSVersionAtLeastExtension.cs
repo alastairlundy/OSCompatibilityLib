@@ -29,7 +29,7 @@ using AlastairLundy.System.Extensions.VersionExtensions;
 namespace PlatformKit.Extensions.OperatingSystem
 {
     // ReSharper disable once InconsistentNaming
-    public static class IsMacOSVersionAtLeastExtension
+    internal static class IsMacOSVersionAtLeastExtension
     {
         /// <summary>
         /// Checks to see whether the specified version of macOS is the same or newer than the installed version of Windows.
@@ -41,7 +41,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
         // ReSharper disable once InconsistentNaming
-        public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        internal static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
             if (IsMacOSExtension.IsMacOS())
             {

@@ -30,22 +30,11 @@ namespace PlatformKit.Extensions.OperatingSystem
     public static class IsFreeBSDExtension
     {
         /// <summary>
-        ///  Returns whether the operating system that is running is FreeBSD.
+        /// Returns whether the operating system that is running is FreeBSD.
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSD()
-        {
-            return GetSystemExtension.GetSystem(PlatformID.Unix).IsFreeBSD();
-        }
-
-        /// <summary>
-        /// Returns whether the operating system that is running is FreeBSD.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns></returns>
-        // ReSharper disable once InconsistentNaming
-        public static bool IsFreeBSD(this System.OperatingSystem operatingSystem)
         {
             return System.Runtime.InteropServices.RuntimeInformation.OSDescription.ToLower().Contains("freebsd");
         }
