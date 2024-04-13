@@ -30,20 +30,10 @@ namespace PlatformKit.Extensions.OperatingSystem
     internal static class IsWindowsExtension
     {
         /// <summary>
-        /// Returns whether the operating system that is running is Windows.
+        /// Returns whether this operating system is Windows.
         /// </summary>
         /// <returns></returns>
         internal static bool IsWindows()
-        {
-            return IsWindows( GetSystemExtension.GetSystem(PlatformID.Win32NT));
-        }
-
-        /// <summary>
-        /// Returns whether this operating system is Windows.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns></returns>
-        internal static bool IsWindows(this System.OperatingSystem operatingSystem)
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
         }

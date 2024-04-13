@@ -33,7 +33,6 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <summary>
         /// Returns whether the operating system that is running is macOS.
         /// </summary>
-        /// <param name="operatingSystem"></param>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
         internal static bool IsMacOS()

@@ -1,8 +1,6 @@
 ﻿using System;
 using AlastairLundy.System.Extensions.VersionExtensions;
 
-using PlatformKit.Extensions.OperatingSystem;
-
 namespace PlatformKit.Extensions.OperatingSystem
 {
     internal static class IsWindowsVersionAtLeastExtension

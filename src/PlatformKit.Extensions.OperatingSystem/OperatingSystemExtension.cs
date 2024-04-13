@@ -24,8 +24,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using AlastairLundy.System.Extensions.StringExtensions;
-using AlastairLundy.System.Extensions.VersionExtensions;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
@@ -48,7 +46,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <returns></returns>
         public static bool IsWindows(this System.OperatingSystem operatingSystem)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+            return IsWindowsExtension.IsWindows();
         }
 
         /// <summary>
@@ -69,7 +67,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOS(this System.OperatingSystem operatingSystem)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.OSX);
+            return IsMacOSExtension.IsMacOS();
         }
 
         /// <summary>
@@ -88,7 +86,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <returns></returns>
         public static bool IsLinux(this System.OperatingSystem operatingSystem)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
+            return IsLinuxExtension.IsLinux();
         }
 
         /// <summary>

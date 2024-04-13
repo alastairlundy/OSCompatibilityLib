@@ -40,7 +40,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
         // ReSharper disable once InconsistentNaming
-        public static bool IsFreeBSDVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        internal static bool IsFreeBSDVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
             if (IsFreeBSDExtension.IsFreeBSD())
             {
