@@ -23,7 +23,7 @@
    */
 
 using System;
-using AlastairLundy.System.Extensions.VersionExtensions;
+using AlastairLundy.Extensions.System.VersionExtensions;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
