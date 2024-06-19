@@ -20,7 +20,7 @@ To replace the existing OperatingSystem class in .NET Standard 2 with this one, 
 ## Compatibility
 The following tables indicate Operating Systems that have detection methods in this library.
 
-Although "Mac Catalyst" as a target is not explicitly supported, implicit support can be detected by getting using 
+Although "Mac Catalyst" as a target is not explicitly supported, implicit support can be indirectly detected.
 
 In PlatformKit 4.x, you can use:
 ```csharp
