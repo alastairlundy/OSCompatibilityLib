@@ -23,7 +23,6 @@
    */
 
 using System;
-using System.Runtime.InteropServices;
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
@@ -46,7 +45,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <returns></returns>
         public static bool IsWindows(this System.OperatingSystem operatingSystem)
         {
-            return IsWindowsExtension.IsWindows();
+            return IsOperatingSystemExtensions.IsWindows();
         }
 
         /// <summary>
@@ -67,7 +66,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOS(this System.OperatingSystem operatingSystem)
         {
-            return IsMacOSExtension.IsMacOS();
+            return IsOperatingSystemExtensions.IsMacOS();
         }
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <returns></returns>
         public static bool IsLinux(this System.OperatingSystem operatingSystem)
         {
-            return IsLinuxExtension.IsLinux();
+            return IsOperatingSystemExtensions.IsLinux();
         }
 
         /// <summary>
@@ -107,7 +106,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSD(this System.OperatingSystem operatingSystem)
         {
-            return IsFreeBSDExtension.IsFreeBSD();
+            return IsOperatingSystemExtensions.IsFreeBSD();
         }
 
         /// <summary>
@@ -121,7 +120,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <exception cref="PlatformNotSupportedException"></exception>
         public static bool IsWindowsVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
-            return IsWindowsVersionAtLeastExtension.IsWindowsVersionAtLeast(major, minor, build, revision);
+            return IsVersionAtLeastExtensions.IsWindowsVersionAtLeast(major, minor, build, revision);
         }
 
         /// <summary>
@@ -136,7 +135,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
-            return IsMacOSVersionAtLeastExtension.IsMacOSVersionAtLeast(major, minor, build, revision);
+            return IsVersionAtLeastExtensions.IsMacOSVersionAtLeast(major, minor, build, revision);
         }
 
         /// <summary>
@@ -150,7 +149,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <exception cref="PlatformNotSupportedException"></exception>
         public static bool IsLinuxVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
-            return IsLinuxVersionAtLeastExtension.IsLinuxVersionAtLeast(major, minor, build, revision);
+            return IsVersionAtLeastExtensions.IsLinuxVersionAtLeast(major, minor, build, revision);
         }
 
         /// <summary>
@@ -165,7 +164,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSDVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
-            return IsFreeBSDVersionAtLeastExtension.IsFreeBSDVersionAtLeast(major, minor, build, revision);
+            return IsVersionAtLeastExtensions.IsFreeBSDVersionAtLeast(major, minor, build, revision);
         }
     }
 }
