@@ -32,7 +32,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <summary>
         /// Returns whether the operating system that is running is Windows.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is Windows based; returns false otherwise.</returns>
         public static bool IsWindows()
         {
             return IsWindows(GetSystemExtension.GetSystem(PlatformID.Win32NT));
@@ -42,7 +42,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// 
         /// </summary>
         /// <param name="operatingSystem"></param>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is Windows based; returns false otherwise.</returns>
         public static bool IsWindows(this System.OperatingSystem operatingSystem)
         {
             return IsOperatingSystemExtensions.IsWindows();
@@ -51,7 +51,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <summary>
         /// Returns whether the operating system that is running is macOS.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is macOS based; returns false otherwise.</returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOS()
         {
@@ -59,10 +59,10 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is macOS.
         /// </summary>
         /// <param name="operatingSystem"></param>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is macOS based; returns false otherwise.</returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOS(this System.OperatingSystem operatingSystem)
         {
@@ -72,26 +72,26 @@ namespace PlatformKit.Extensions.OperatingSystem
         /// <summary>
         /// Returns whether the operating system that is running is Linux.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is Linux based; returns false otherwise.</returns>
         public static bool IsLinux()
         {
             return IsLinux(GetSystemExtension.GetSystem(PlatformID.Unix));
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is based on Linux.
         /// </summary>
         /// <param name="operatingSystem"></param>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is Linux based; returns false otherwise.</returns>
         public static bool IsLinux(this System.OperatingSystem operatingSystem)
         {
             return IsOperatingSystemExtensions.IsLinux();
         }
 
         /// <summary>
-        ///  Returns whether the operating system that is running is FreeBSD.
+        /// Returns whether the operating system that is running is based on FreeBSD.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is FreeBSD based; returns false otherwise.</returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSD()
         {
@@ -99,10 +99,10 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is based on FreeBSD.
         /// </summary>
         /// <param name="operatingSystem"></param>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is FreeBSD based; returns false otherwise.</returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSD(this System.OperatingSystem operatingSystem)
         {
