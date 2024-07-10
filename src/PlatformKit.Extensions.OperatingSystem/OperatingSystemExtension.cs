@@ -39,7 +39,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is Windows.
         /// </summary>
         /// <param name="operatingSystem"></param>
         /// <returns>true if the Operating System being run is Windows based; returns false otherwise.</returns>
