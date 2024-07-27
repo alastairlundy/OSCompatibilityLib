@@ -46,10 +46,10 @@ if(OperatingSystem.IsMacOS()){
 ### Mobile Operating Systems
 | Operating System | Support Status     |
 |------------------|--------------------|
-| IOS              | :white_check_mark, Supported from v1.5.0 onwards |
+| IOS              | :white_check_mark:, Supported from v1.5.0 onwards |
 | tvOS             | :x:, Not Supported |
-| watchOS          | :white_check_mark, Supported from v1.5.0 onwards |
-| Android          | :white_check_mark, Supported from v1.5.0 onwards |
+| watchOS          | :white_check_mark:, Supported from v1.5.0 onwards |
+| Android          | :white_check_mark:, Supported from v1.5.0 onwards |
 | Android TV       | :x:, Not Supported |
 | wearOS           | :x:, Not Supported |
 | Tizen            | :x:, Not Supported |
