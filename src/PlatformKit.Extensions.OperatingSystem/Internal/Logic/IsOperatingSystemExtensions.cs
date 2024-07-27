@@ -49,22 +49,22 @@ namespace PlatformKit.Extensions.OperatingSystem
             return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
         }
         
-        public static bool IsFreeBSD()
+        internal static bool IsFreeBSD()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("freebsd");
         }
 
-        public static bool IsAndroid()
+        internal static bool IsAndroid()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("android");
         }
 
-        public static bool IsIOS()
+        internal static bool IsIOS()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("ios");
         }
 
-        public static bool IsWatchOS()
+        internal static bool IsWatchOS()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("watch");
         }
