@@ -22,24 +22,12 @@ The following tables indicate Operating Systems that have detection methods in t
 
 Although "Mac Catalyst" as a target is not explicitly supported, implicit support can be indirectly detected.
 
-In PlatformKit 4.x, you can use:
+You can use:
 ```csharp
 
 if(OperatingSystem.IsMacOS()){
     
-    if(MacOsAnalyzer.IsAtLeastVersion(new Version(10, 13)){
-        // Mac Catalyst specific code goes here
-    }
-}
-```
-
-In PlatformKit 3.x, you should use:
-```csharp
-
-if(OperatingSystem.IsMacOS()){
-    MacOsAnalyzer macOSAnalyzer = new MacOsAnalyzer();
-    
-    if(macOsAnalyzer.IsAtLeastVersion(new Version(10, 13)){
+    if(OperatingSystem.IsAtLeastVersion(10, 15)){
         // Mac Catalyst specific code goes here
     }
 }
@@ -58,10 +46,10 @@ if(OperatingSystem.IsMacOS()){
 ### Mobile Operating Systems
 | Operating System | Support Status     |
 |------------------|--------------------|
-| IOS              | :x:, Not Supported |
+| IOS              | :white_check_mark, Supported from v1.5.0 onwards |
 | tvOS             | :x:, Not Supported |
-| watchOS          | :x:, Not Supported |
-| Android          | :x:, Not Supported |
+| watchOS          | :white_check_mark, Supported from v1.5.0 onwards |
+| Android          | :white_check_mark, Supported from v1.5.0 onwards |
 | Android TV       | :x:, Not Supported |
 | wearOS           | :x:, Not Supported |
 | Tizen            | :x:, Not Supported |
