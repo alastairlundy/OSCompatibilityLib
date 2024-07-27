@@ -23,6 +23,7 @@
    */
 
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -50,7 +51,22 @@ namespace PlatformKit.Extensions.OperatingSystem
         
         public static bool IsFreeBSD()
         {
-            return System.Runtime.InteropServices.RuntimeInformation.OSDescription.ToLower().Contains("freebsd");
+            return RuntimeInformation.OSDescription.ToLower().Contains("freebsd");
+        }
+
+        public static bool IsAndroid()
+        {
+            return RuntimeInformation.OSDescription.ToLower().Contains("android");
+        }
+
+        public static bool IsIOS()
+        {
+            return RuntimeInformation.OSDescription.ToLower().Contains("ios");
+        }
+
+        public static bool IsWatchOS()
+        {
+            return RuntimeInformation.OSDescription.ToLower().Contains("watch");
         }
     }
 }
