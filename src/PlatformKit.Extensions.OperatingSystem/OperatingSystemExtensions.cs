@@ -23,6 +23,7 @@
    */
 
 using System;
+// ReSharper disable InconsistentNaming
 
 namespace PlatformKit.Extensions.OperatingSystem
 {
@@ -107,6 +108,63 @@ namespace PlatformKit.Extensions.OperatingSystem
         public static bool IsFreeBSD(this System.OperatingSystem operatingSystem)
         {
             return IsOperatingSystemExtensions.IsFreeBSD();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>true if the Operating System being run is IOS based; returns false otherwise.</returns>
+        public static bool IsIOS()
+        {
+            return IsOperatingSystemExtensions.IsIOS();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns>true if the Operating System being run is IOS based; returns false otherwise.</returns>
+        public static bool IsIOS(this System.OperatingSystem operatingSystem)
+        {
+            return IsOperatingSystemExtensions.IsIOS();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>true if the Operating System being run is Android based; returns false otherwise.</returns>
+        public static bool IsAndroid()
+        {
+            return IsOperatingSystemExtensions.IsAndroid();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns>true if the Operating System being run is Android based; returns false otherwise.</returns>
+        public static bool IsAndroid(this System.OperatingSystem operatingSystem)
+        {
+            return IsOperatingSystemExtensions.IsAndroid();
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsWatchOS()
+        {
+            return IsOperatingSystemExtensions.IsWatchOS();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns></returns>
+        public static bool IsWatchOS(this System.OperatingSystem operatingSystem)
+        {
+            return IsOperatingSystemExtensions.IsWatchOS();
         }
 
         /// <summary>
