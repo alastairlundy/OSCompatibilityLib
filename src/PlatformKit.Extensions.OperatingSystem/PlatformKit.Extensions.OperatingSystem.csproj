@@ -6,12 +6,12 @@
         <Description>Add Windows, macOS, Linux, and FreeBSD detection to .NET Standard 2 projects via extension methods.</Description>
         <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
         <RepositoryUrl>https://github.com/PlatformKitLibrary/PlatformKit.Extensions.OperatingSystem</RepositoryUrl>
-        <PackageReleaseNotes>### Changes since 1.2.0
-* Fixed an issue whereby 1.2.0 would break API compatibility with 1.1.0</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 1.2.1
+* Prevent usage of SystemExtensions 4.x on 1.2.x to prevent breaking changes</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.2.1.0</AssemblyVersion>
-        <FileVersion>1.2.1.0</FileVersion>
-        <PackageVersion>1.2.1</PackageVersion>
+        <AssemblyVersion>1.2.2.0</AssemblyVersion>
+        <FileVersion>1.2.2.0</FileVersion>
+        <PackageVersion>1.2.2</PackageVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
@@ -39,7 +39,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.System.Extensions" Version="3.0.1" />
+      <PackageReference Include="AlastairLundy.System.Extensions" Version="[3.0.1, 4.0.0)" />
     </ItemGroup>
 
 
