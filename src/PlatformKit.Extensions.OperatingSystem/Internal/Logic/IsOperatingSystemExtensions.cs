@@ -66,7 +66,7 @@ namespace PlatformKit.Extensions.OperatingSystem
 
         internal static bool IsWatchOS()
         {
-            return RuntimeInformation.OSDescription.ToLower().Contains("watch");
+            return RuntimeInformation.OSDescription.ToLower().Contains("watchos");
         }
     }
 }
