@@ -40,7 +40,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.0.1, 6.0.0)]" />
+      <PackageReference Include="AlastairLundy.Extensions.System" Version="[5.0.1, 6.0.0)" />
     </ItemGroup>
 
 
