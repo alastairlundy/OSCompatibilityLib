@@ -6,14 +6,12 @@
         <Description>Add Windows, macOS, Linux, and FreeBSD detection to .NET Standard 2 projects via extension methods.</Description>
         <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
         <RepositoryUrl>https://github.com/PlatformKitLibrary/PlatformKit.Extensions.OperatingSystem</RepositoryUrl>
-        <PackageReleaseNotes>### Changes since 1.4.0
-* Added support for detecting IOS
-* Added support for detecting Android
-* Added support for detecting Watch OS</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 1.5.0
+* Add support for wearOS - This is untested and is not guaranteed to work
+* Improved robustness of watchOS detection - weatchOS detection is still untested and not guranteed to work
+* Added some guard rails to prevent future 1.5.x usage on SystemExtensions 6 - If/When SystemExtensions 6 is released a new version of this library will be released to add support for it.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <AssemblyVersion>1.5.0.0</AssemblyVersion>
-        <FileVersion>1.5.0.0</FileVersion>
-        <PackageVersion>1.5.0</PackageVersion>
+        <PackageVersion>1.5.1</PackageVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
