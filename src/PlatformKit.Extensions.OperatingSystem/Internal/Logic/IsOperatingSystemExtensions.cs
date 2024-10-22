@@ -68,5 +68,10 @@ namespace PlatformKit.Extensions.OperatingSystem
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("watchos");
         }
+        
+        internal static bool IsWearOS()
+        {
+            return RuntimeInformation.OSDescription.ToLower().Contains("wearos");
+        }
     }
 }

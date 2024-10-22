@@ -167,6 +167,16 @@ namespace PlatformKit.Extensions.OperatingSystem
             return IsOperatingSystemExtensions.IsWatchOS();
         }
 
+        public static bool IsWearOS()
+        {
+            return IsOperatingSystemExtensions.IsWearOS();
+        }
+
+        public static bool IsWearOS(this System.OperatingSystem operatingSystem)
+        {
+            return IsOperatingSystemExtensions.IsWearOS();
+        }
+
         /// <summary>
         /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
         /// </summary>
