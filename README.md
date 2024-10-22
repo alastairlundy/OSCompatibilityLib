@@ -35,21 +35,21 @@ if(OperatingSystem.IsMacOS()){
 
 
 ### Desktop Operating Systems
-| Operating System Target | Support Status                |
-|-------------------------|-------------------------------|
-| Windows                 | :white_check_mark:, Supported | 
-| Linux                   | :white_check_mark:, Supported | 
-| FreeBSD                 | :white_check_mark:, Supported |
-| macOS                   | :white_check_mark:, Supported |
-| Mac Catalyst            | :x:, Not Supported            | 
+| Operating System Target | Support Status                | Required PlatformKit.Extensions.OperatingSystem Version |
+|-------------------------|-------------------------------|--------------------------------|
+| Windows                 | :white_check_mark:, Supported | Any |
+| Linux                   | :white_check_mark:, Supported | Any |
+| FreeBSD                 | :white_check_mark:, Supported | Any |
+| macOS                   | :white_check_mark:, Supported | Any |
+| Mac Catalyst            | :x:, Not Supported            | N/A, Not Supported |
 
 ### Mobile Operating Systems
-| Operating System | Support Status     |
-|------------------|--------------------|
-| IOS              | :white_check_mark:, Supported from v1.5.0 onwards |
-| tvOS             | :x:, Not Supported |
-| watchOS          | :white_check_mark:, Supported from v1.5.0 onwards |
-| Android          | :white_check_mark:, Supported from v1.5.0 onwards |
-| Android TV       | :x:, Not Supported |
-| wearOS           | :x:, Not Supported |
-| Tizen            | :x:, Not Supported |
+| Operating System | Support Status     |Required PlatformKit.Extensions.OperatingSystem Version |
+|------------------|--------------------|-------------------------------|
+| IOS              | :white_check_mark: | 1.5.0 or newer |
+| tvOS             | :x:, Not Supported | N/A Not Supported |
+| watchOS          | :white_check_mark: | 1.5.0 or newer |
+| Android          | :white_check_mark: | 1.5.0 or newer |
+| Android TV       | :x:, Not Supported | N/A Not Supported |
+| wearOS           | :white_check_mark: | 1.5.1 or newer |
+| Tizen            | :x:, Not Supported | N/A Not Supported |
