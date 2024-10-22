@@ -25,7 +25,6 @@
 using System;
 
 using AlastairLundy.Extensions.System;
-using AlastairLundy.Extensions.System.VersionExtensions;
 
 // ReSharper disable InconsistentNaming
 
