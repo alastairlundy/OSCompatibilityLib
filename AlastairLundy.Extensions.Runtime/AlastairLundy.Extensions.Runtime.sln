@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlastairLundy.Extensions.Runtime", "AlastairLundy.Extensions.Runtime.csproj", "{98F0975E-6F21-4274-ACE9-7F5B2A452797}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformKit.Extensions.OperatingSystem", "..\PlatformKit.Extensions.OperatingSystem\PlatformKit.Extensions.OperatingSystem\PlatformKit.Extensions.OperatingSystem.csproj", "{D7DD0353-8A4B-46D0-B8F5-01435A54F70F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98F0975E-6F21-4274-ACE9-7F5B2A452797}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98F0975E-6F21-4274-ACE9-7F5B2A452797}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98F0975E-6F21-4274-ACE9-7F5B2A452797}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98F0975E-6F21-4274-ACE9-7F5B2A452797}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7DD0353-8A4B-46D0-B8F5-01435A54F70F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7DD0353-8A4B-46D0-B8F5-01435A54F70F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7DD0353-8A4B-46D0-B8F5-01435A54F70F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7DD0353-8A4B-46D0-B8F5-01435A54F70F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
