@@ -111,7 +111,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is based on IOS.
         /// </summary>
         /// <returns>true if the Operating System being run is IOS based; returns false otherwise.</returns>
         public static bool IsIOS()
@@ -120,7 +120,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is based on IOS.
         /// </summary>
         /// <param name="operatingSystem"></param>
         /// <returns>true if the Operating System being run is IOS based; returns false otherwise.</returns>
@@ -130,7 +130,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is based on Android.
         /// </summary>
         /// <returns>true if the Operating System being run is Android based; returns false otherwise.</returns>
         public static bool IsAndroid()
@@ -139,7 +139,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is based on Android.
         /// </summary>
         /// <param name="operatingSystem"></param>
         /// <returns>true if the Operating System being run is Android based; returns false otherwise.</returns>
@@ -149,7 +149,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
         
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is based on watchOS.
         /// </summary>
         /// <returns></returns>
         public static bool IsWatchOS()
@@ -158,7 +158,7 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
-        /// 
+        /// Returns whether the operating system that is running is based on watchOS.
         /// </summary>
         /// <param name="operatingSystem"></param>
         /// <returns></returns>
@@ -167,11 +167,20 @@ namespace PlatformKit.Extensions.OperatingSystem
             return IsOperatingSystemExtensions.IsWatchOS();
         }
 
+        /// <summary>
+        /// Returns whether the operating system that is running is based on wearOS.
+        /// </summary>
+        /// <returns></returns>
         public static bool IsWearOS()
         {
             return IsOperatingSystemExtensions.IsWearOS();
         }
-
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns></returns>
         public static bool IsWearOS(this System.OperatingSystem operatingSystem)
         {
             return IsOperatingSystemExtensions.IsWearOS();

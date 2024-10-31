@@ -11,7 +11,7 @@
 * Improved robustness of watchOS detection - weatchOS detection is still untested and not guranteed to work
 * Added some guard rails to prevent future 1.5.x usage on SystemExtensions 6 - If/When SystemExtensions 6 is released a new version of this library will be released to add support for it.</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-        <PackageVersion>1.5.1</PackageVersion>
+        <PackageVersion>1.5.2</PackageVersion>
         <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
