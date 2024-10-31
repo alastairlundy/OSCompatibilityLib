@@ -34,7 +34,7 @@ using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensio
 namespace AlastairLundy.Extensions.Runtime.Identification {
         
 /// <summary>
-/// A class to manage RuntimeId detection and programmatic generations
+/// A class to manage Target Framework detection
 /// </summary>
 public class TargetFrameworkIdentification
 {

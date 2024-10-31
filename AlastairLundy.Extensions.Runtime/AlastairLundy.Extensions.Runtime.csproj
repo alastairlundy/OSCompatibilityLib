@@ -5,6 +5,16 @@
         <Title>AlastairLundy.Extensions.Runtime</Title>
         <Authors>AlastairLundy</Authors>
         <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageVersion>2.0.0-preview.1</PackageVersion>
+        <Description>Add OS detection support for Windows, macOS, Linux, and FreeBSD to .NET Stadard 2 projects and more.</Description>
+        <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
+        <RepositoryUrl>https://github.com/alastairlundy/RuntimeExtensions</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>Initial Release as Runtime Extensions package.</PackageReleaseNotes>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,6 +39,18 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="..\LICENSE.txt">
+          <PackagePath>LICENSE.txt</PackagePath>
+        <Link>LICENSE.txt</Link>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Include="..\README.md">
+        <Link>README.md</Link>
+          <PackagePath>README.md</PackagePath>
+      </Content>
     </ItemGroup>
 
 </Project>
