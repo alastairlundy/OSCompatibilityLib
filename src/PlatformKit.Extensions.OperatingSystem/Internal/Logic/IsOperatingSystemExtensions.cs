@@ -73,5 +73,17 @@ namespace PlatformKit.Extensions.OperatingSystem
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("wearos");
         }
+
+        internal static bool IsTvOS()
+        {
+            if(RuntimeInformation.OSDescription.ToLower().Contains("tvos") && RuntimeInformation.OSDescription.ToLower().Contains("android"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

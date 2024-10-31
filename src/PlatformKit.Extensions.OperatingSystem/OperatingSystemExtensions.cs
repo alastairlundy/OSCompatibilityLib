@@ -178,6 +178,25 @@ namespace PlatformKit.Extensions.OperatingSystem
         }
 
         /// <summary>
+        /// Returns whether the operating system that is running is based on tvOS.
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsTvOS()
+        {
+            return IsOperatingSystemExtensions.IsTvOS();
+        }
+        
+        /// <summary>
+        /// Returns whether the operating system that is running is based on tvOS.
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns></returns>
+        public static bool IsTvOS(this System.OperatingSystem operatingSystem)
+        {
+            return IsOperatingSystemExtensions.IsTvOS();
+        }
+
+        /// <summary>
         /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
         /// </summary>
         /// <param name="major"></param>
