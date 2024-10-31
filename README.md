@@ -44,12 +44,12 @@ if(OperatingSystem.IsMacOS()){
 | Mac Catalyst            | :x:, Not Supported            | N/A, Not Supported |
 
 ### Mobile Operating Systems
-| Operating System | Support Status     |Required PlatformKit.Extensions.OperatingSystem Version |
-|------------------|--------------------|-------------------------------|
-| IOS              | :white_check_mark: | 1.5.0 or newer |
-| tvOS             | :x:, Not Supported | N/A Not Supported |
-| watchOS          | :white_check_mark: | 1.5.0 or newer |
-| Android          | :white_check_mark: | 1.5.0 or newer |
-| Android TV       | :x:, Not Supported | N/A Not Supported |
-| wearOS           | :white_check_mark: | 1.5.1 or newer |
-| Tizen            | :x:, Not Supported | N/A Not Supported |
+| Operating System | Support Status     | Required PlatformKit.Extensions.OperatingSystem Version |
+|------------------|--------------------|---------------------------------------------------------|
+| IOS              | :white_check_mark: | 1.5.0 or newer                                          |
+| tvOS             | :white_check_mark: | 1.5.2 or newer                                          |                                         |
+| watchOS          | :white_check_mark: | 1.5.0 or newer                                          |
+| Android          | :white_check_mark: | 1.5.0 or newer                                          |
+| Android TV       | :x:, Not Supported | N/A Not Supported                                       |
+| wearOS           | :white_check_mark: | 1.5.1 or newer                                          |
+| Tizen            | :x:, Not Supported | N/A Not Supported                                       |
