@@ -56,9 +56,14 @@ namespace PlatformKit.Extensions.OperatingSystem
 
         internal static bool IsAndroid()
         {
-            return RuntimeInformation.OSDescription.ToLower().Contains("android");
+            return RuntimeInformation.OSDescription.ToLower().Contains("android") && RuntimeInformation.OSDescription.ToLower().Contains("tv") == false;
         }
 
+        internal static bool IsAndroidTV()
+        {
+            return RuntimeInformation.OSDescription.ToLower().Contains("android") && RuntimeInformation.OSDescription.ToLower().Contains("tv") == true;
+        }
+        
         internal static bool IsIOS()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("ios");
