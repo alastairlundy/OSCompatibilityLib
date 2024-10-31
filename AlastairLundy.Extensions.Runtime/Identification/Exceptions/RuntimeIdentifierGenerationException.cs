@@ -24,13 +24,14 @@
 
 
 using System;
+using AlastairLundy.Extensions.Runtime.Internal.Localizations;
 
 namespace AlastairLundy.Extensions.Runtime.Identification.Exceptions
 {
     public class RuntimeIdentifierGenerationException : Exception
     {
 
-        public RuntimeIdentifierGenerationException() : base("Failed to generate the RuntimeIdentifier given the specified parameters.")
+        public RuntimeIdentifierGenerationException() : base(Resources.Exceptions_RuntimeIdentifierGeneration)
         {
             
         }

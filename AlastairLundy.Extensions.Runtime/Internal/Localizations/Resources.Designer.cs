@@ -8,6 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace AlastairLundy.Extensions.Runtime.Internal.Localizations {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -35,7 +38,7 @@ namespace AlastairLundy.Extensions.Runtime.Internal.Localizations {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PlatformKit.Internal.Localizations.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("AlastairLundy.Extensions.Runtime.Internal.Localizations.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,7 +69,7 @@ namespace AlastairLundy.Extensions.Runtime.Internal.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This function or feature is only supported on FreeBSD based operating systems..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_FreeBsdOnly {
             get {
@@ -75,7 +78,7 @@ namespace AlastairLundy.Extensions.Runtime.Internal.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This function or feature is only supported on Linux based operating systems..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_LinuxOnly {
             get {
@@ -84,7 +87,7 @@ namespace AlastairLundy.Extensions.Runtime.Internal.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This function or feature is only supported on macOS based operating systems..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_MacOnly {
             get {
@@ -93,11 +96,20 @@ namespace AlastairLundy.Extensions.Runtime.Internal.Localizations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to This function or feature is only supported on Windows based operating systems..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_WindowsOnly {
             get {
                 return ResourceManager.GetString("Exceptions.PlatformNotSupported.WindowsOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to generate the RuntimeIdentifier given the specified parameters..
+        /// </summary>
+        internal static string Exceptions_RuntimeIdentifierGeneration {
+            get {
+                return ResourceManager.GetString("Exceptions.RuntimeIdentifierGeneration", resourceCulture);
             }
         }
         
