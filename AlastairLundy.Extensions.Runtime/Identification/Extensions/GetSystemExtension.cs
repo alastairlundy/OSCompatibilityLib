@@ -26,7 +26,7 @@ using System;
 
 namespace AlastairLundy.Extensions.Runtime.Identification
 {
-    internal static class GetSystemExtension
+    public static class GetSystemExtension
     {
         /// <summary>
         /// 
