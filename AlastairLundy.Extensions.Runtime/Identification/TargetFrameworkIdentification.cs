@@ -26,6 +26,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 using AlastairLundy.Extensions.System.Strings.Versioning;
+// ReSharper disable MemberCanBePrivate.Global
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -38,7 +39,8 @@ namespace AlastairLundy.Extensions.Runtime.Identification {
 /// </summary>
 public class TargetFrameworkIdentification
 {
-    protected RuntimeIdentification runtimeIdentification;
+    // ReSharper disable once InconsistentNaming
+    protected readonly RuntimeIdentification runtimeIdentification;
     
     public TargetFrameworkIdentification()
     {
@@ -62,7 +64,10 @@ public class TargetFrameworkIdentification
     // ReSharper disable once InconsistentNaming
     protected string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
     {
+#if NET6_0_OR_GREATER
         Version frameworkVersion = GetDotNetVersion();
+#endif
+        
         StringBuilder stringBuilder = new StringBuilder();
 
         if (OperatingSystem.IsMacOS())
@@ -94,7 +99,6 @@ public class TargetFrameworkIdentification
                 bool isAtLeastWin8Point1 = OperatingSystem.IsWindowsVersionAtLeast(6, 3, 9600);
 
                 bool isAtLeastWin10V1607 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 14393);
-                
                 
                 if (isAtLeastWin8 || isAtLeastWin8Point1)
                 {

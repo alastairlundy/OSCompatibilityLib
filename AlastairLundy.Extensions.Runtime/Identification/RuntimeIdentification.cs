@@ -22,9 +22,16 @@
        SOFTWARE.
    */
 
+#if NETSTANDARD2_1 || NET5_0_OR_GREATER
+#nullable enable
+
+// ReSharper disable once RedundantUsingDirective
+using AlastairLundy.Extensions.System.Strings.Versioning;
+#endif
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -38,7 +45,6 @@ using AlastairLundy.Extensions.Runtime.Identification.Exceptions;
 using AlastairLundy.Extensions.Runtime.Internal.Localizations;
 
 using AlastairLundy.Extensions.System;
-using AlastairLundy.Extensions.System.Strings.Versioning;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -129,12 +135,23 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// </summary>
         /// <param name="identifierType"></param>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("freebsd")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("watchos")]
+        [SupportedOSPlatform("android")]
+        [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
+#endif
         protected async Task<string> GetOsNameString(RuntimeIdentifierType identifierType)
         {
 #if NET5_0_OR_GREATER
             string? osName = null;
 #else
-            string osName = null;
+            string osName = string.Empty;
 #endif
             
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
@@ -197,7 +214,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 }
             }
 
-            if (osName == null)
+            if (osName == null || string.IsNullOrEmpty(osName))
             {
                 throw new PlatformNotSupportedException();
             }
@@ -260,7 +277,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
             }
             if (OperatingSystem.IsLinux())
             {
-                osVersion = PlatformID.Unix.GetSystem().Version.ToString();
+                osVersion = OperatingSystemExtensions.Version.ToString();
             }
 #if NETCOREAPP3_1_OR_GREATER            
             if (OperatingSystem.IsFreeBSD())
@@ -292,7 +309,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 if (isAtLeastHighSierra)
                 {
                     
-                    if (OperatingSystem.IsMacOSVersionAtLeast(11, 0))
+                    if (OperatingSystem.IsMacOSVersionAtLeast(11))
                     {
                         osVersion = $"{version.Major}";
                     }
@@ -307,6 +324,11 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 }
             }
 
+            if (osVersion == null)
+            {
+                throw new PlatformNotSupportedException();
+            }
+
             return osVersion;
         }
 
@@ -318,6 +340,17 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// <param name="identifierType"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentException"></exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("freebsd")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [SupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("watchos")]
+        [UnsupportedOSPlatform("browser")]
+#endif
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
         {
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
@@ -347,6 +380,17 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("freebsd")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [SupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("watchos")]
+        [UnsupportedOSPlatform("browser")]
+#endif
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
             string osName = GetOsNameString(identifierType).Result;
@@ -437,6 +481,17 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// Detects possible Runtime Identifiers that could be applicable to the system calling the method.
         /// </summary>
         /// <returns></returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("freebsd")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [SupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("watchos")]
+        [UnsupportedOSPlatform("browser")]
+#endif
         public Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
         {
             Dictionary<RuntimeIdentifierType, string> possibilities = new Dictionary<RuntimeIdentifierType, string>
