@@ -53,15 +53,16 @@ if(OperatingSystem.IsMacOS()){
 | Mac Catalyst            | :x:, Not Explicitly Supported | N/A, Not Explicitly Supported |
 
 ### Mobile Operating Systems
-| Operating System | Support Status     | Required Library Version |
-|------------------|--------------------|--------------------------|
-| IOS              | :white_check_mark: | 1.5.0 or newer           |
-| tvOS             | :white_check_mark: | 1.5.2 or newer           |                                         |
-| watchOS          | :white_check_mark: | 1.5.0 or newer           |
-| Android          | :white_check_mark: | 1.5.0 or newer           |
-| Android TV       | :x:, Not Supported | N/A Not Supported        |
-| wearOS           | :white_check_mark: | 1.5.1 or newer           |
-| Tizen            | :x:, Not Supported | N/A Not Supported        |
+| Operating System | Support Status         | Required Library Version |
+|------------------|------------------------|--------------------------|
+| IOS              | :white_check_mark:     | 1.5.0 or newer           |
+| tvOS             | :white_check_mark:     | 1.5.2 or newer           |                                         |
+| watchOS          | :white_check_mark:     | 1.5.0 or newer           |
+| Android          | :white_check_mark:     | 1.5.0 or newer           |
+| Fire OS          | :x:, Not Yet Supported | N/A Not Supported        | 
+| Android TV       | :x:, Not Supported     | N/A Not Supported        |
+| wearOS           | :white_check_mark:     | 1.5.1 or newer           |
+| Tizen            | :white_check_mark:     | 2.0.0 or newer           |
 
 ## License
 
