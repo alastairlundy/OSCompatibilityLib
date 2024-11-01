@@ -161,6 +161,25 @@ namespace AlastairLundy.Extensions.Runtime
         }
 
         /// <summary>
+        /// Returns whether the operating system that is running is based on Tizen.
+        /// </summary>
+        /// <returns>true if the Operating System being run is Tizen based; returns false otherwise.</returns>
+        public static bool IsTizen()
+        {
+            return RuntimeInformation.OSDescription.ToLower().Contains("tizen");
+        }
+
+        /// <summary>
+        /// Returns whether the operating system that is running is based on Tizen.
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns>true if the Operating System being run is Tizen based; returns false otherwise.</returns>
+        public static bool IsTizen(this OperatingSystem operatingSystem)
+        {
+            return IsTizen();
+        }
+        
+        /// <summary>
         /// Returns whether the operating system that is running is based on IOS.
         /// </summary>
         /// <returns>true if the Operating System being run is IOS based; returns false otherwise.</returns>
