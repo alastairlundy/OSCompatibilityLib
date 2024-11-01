@@ -24,11 +24,15 @@
 
 using System;
 using System.Runtime.InteropServices;
+
+#if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
+#endif
 
 using AlastairLundy.Extensions.Runtime.Identification;
 
 using AlastairLundy.Extensions.System;
+// ReSharper disable MemberCanBePrivate.Global
 
 // ReSharper disable InconsistentNaming
 
@@ -59,7 +63,6 @@ namespace AlastairLundy.Extensions.Runtime
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="operatingSystem"></param>
         /// <returns></returns>
         #if NET5_0_OR_GREATER
         [UnsupportedOSPlatform("browser")]
@@ -219,6 +222,7 @@ namespace AlastairLundy.Extensions.Runtime
 
         public static bool IsAndroidTV()
         {
+            // ReSharper disable once RedundantBoolCompare
             return RuntimeInformation.OSDescription.ToLower().Contains("android") && RuntimeInformation.OSDescription.ToLower().Contains("tv") == true;
         }
 

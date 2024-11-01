@@ -31,7 +31,11 @@ using AlastairLundy.Extensions.System.Strings.Versioning;
 
 using System;
 using System.Collections.Generic;
+
+#if NET5_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
+#endif
+
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -106,7 +110,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        internal string GetOsReleasePropertyValue(string propertyName)
+        private string GetOsReleasePropertyValue(string propertyName)
         {
             if (OperatingSystem.IsLinux())
             {
@@ -249,6 +253,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 {
                     osVersion = "11";
                 }
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 else if (!isWindows10 && !isWindows11)
                 {
 #if NET5_0_OR_GREATER

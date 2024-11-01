@@ -24,6 +24,7 @@
 
 
 using System;
+
 using AlastairLundy.Extensions.Runtime.Internal.Localizations;
 
 namespace AlastairLundy.Extensions.Runtime.Identification.Exceptions
