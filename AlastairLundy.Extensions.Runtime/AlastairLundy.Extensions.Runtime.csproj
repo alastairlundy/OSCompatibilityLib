@@ -7,12 +7,14 @@
         <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <PackageVersion>2.0.0-preview.1</PackageVersion>
+        <PackageVersion>2.0.0-preview.2</PackageVersion>
         <Description>Add OS detection support for Windows, macOS, Linux, and FreeBSD to .NET Stadard 2 projects and more.</Description>
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/RuntimeExtensions</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>Initial Release as Runtime Extensions package.</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 2.0.0 Preview 1
+* Add experimental Tizen support
+* Optimizations and improvements</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>

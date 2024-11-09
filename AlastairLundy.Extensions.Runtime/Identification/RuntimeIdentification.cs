@@ -23,10 +23,11 @@
    */
 
 #if NETSTANDARD2_1 || NET5_0_OR_GREATER
+using AlastairLundy.Extensions.System.Strings.Versioning;
+
 #nullable enable
 
 // ReSharper disable once RedundantUsingDirective
-using AlastairLundy.Extensions.System.Strings.Versioning;
 #endif
 
 using System;
