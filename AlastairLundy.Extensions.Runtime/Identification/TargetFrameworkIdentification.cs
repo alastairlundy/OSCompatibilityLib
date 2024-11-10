@@ -122,7 +122,6 @@ public class TargetFrameworkIdentification
         {
             //Do nothing because Linux doesn't have a version specific TFM.
         }
-#if NET5_0_OR_GREATER
         else if (OperatingSystem.IsAndroid())
         {
             stringBuilder.Append('-');
@@ -143,7 +142,6 @@ public class TargetFrameworkIdentification
             stringBuilder.Append('-');
             stringBuilder.Append("watchos");
         }
-#endif
 #if NET8_0_OR_GREATER
         if (frameworkVersion.Major >= 8)
         {
@@ -199,13 +197,10 @@ public class TargetFrameworkIdentification
             {
                 stringBuilder.Append("mac");
             }
-#if NET5_0_OR_GREATER
             else if (OperatingSystem.IsAndroid())
             {
                 stringBuilder.Append("android");
             }
-#endif
-
             return stringBuilder.ToString();
         }
 
