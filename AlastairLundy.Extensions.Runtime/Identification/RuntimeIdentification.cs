@@ -150,7 +150,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         [SupportedOSPlatform("android")]
         [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
 #endif
-        protected async Task<string> GetOsNameString(RuntimeIdentifierType identifierType)
+        protected string GetOsNameString(RuntimeIdentifierType identifierType)
         {
 #if NET5_0_OR_GREATER
             string? osName = null;
@@ -203,13 +203,11 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                     }
                     else if (identifierType == RuntimeIdentifierType.Specific)
                     {
-                        osName = await Task.Run(() =>
-                            GetOsReleasePropertyValue("IDENTIFIER_LIKE="));
+                        osName = GetOsReleasePropertyValue("IDENTIFIER_LIKE=");
                     }
                     else if (identifierType == RuntimeIdentifierType.DistroSpecific || identifierType == RuntimeIdentifierType.VersionLessDistroSpecific)
                     {
-                        osName = await Task.Run(()=> 
-                            GetOsReleasePropertyValue("IDENTIFIER="));
+                        osName = GetOsReleasePropertyValue("IDENTIFIER=");
                     }
                     else
                     {
@@ -396,7 +394,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
 #endif
         public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
-            string osName = GetOsNameString(identifierType).Result;
+            string osName = GetOsNameString(identifierType);
             string cpuArch = GetArchitectureString();
             
             if (identifierType == RuntimeIdentifierType.AnyGeneric ||
