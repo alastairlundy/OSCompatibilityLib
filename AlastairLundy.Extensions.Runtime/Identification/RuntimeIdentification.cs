@@ -482,6 +482,24 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         }
 
         /// <summary>
+        /// Generates a generic Runtime Identifier, that does not make use of an operating system version, that is applicable to the system calling the method.
+        /// </summary>
+        /// <returns>the generic Runtime Identifier.</returns>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("freebsd")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("browser")]
+#endif
+        public static string GetGenericRuntimeIdentifier()
+        {
+            return GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic);
+        }
+
+        /// <summary>
         /// Detects possible Runtime Identifiers that could be applicable to the system calling the method.
         /// </summary>
         /// <returns>all Runtime Identifiers that are applicable for the system calling the method.</returns>
