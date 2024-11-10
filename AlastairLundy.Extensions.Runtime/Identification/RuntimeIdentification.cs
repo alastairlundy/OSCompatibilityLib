@@ -42,8 +42,6 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 #endif
 
-using System.Threading.Tasks;
-
 using AlastairLundy.Extensions.Runtime.Identification.Exceptions;
 using AlastairLundy.Extensions.Runtime.Internal.Localizations;
 
@@ -239,7 +237,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
             if (OperatingSystem.IsWindows())
             {
                 bool isWindows10 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 10240) &&
-                                   OperatingSystemExtensions.Version.IsOlderThan(new Version(10, 0, 20349, 0));
+                                   OperatingSystemExtensions.Version.IsOlderThan(new Version(10, 0, 20349));
                 
                 bool isWindows11 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000);
                 
