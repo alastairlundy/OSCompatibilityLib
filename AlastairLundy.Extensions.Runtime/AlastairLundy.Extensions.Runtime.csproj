@@ -7,14 +7,30 @@
         <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <PackageVersion>2.0.0-preview.2</PackageVersion>
+        <PackageVersion>2.0.0</PackageVersion>
         <Description>Add OS detection support for Windows, macOS, Linux, and FreeBSD to .NET Stadard 2 projects and more.</Description>
         <Copyright>Copyright (c) Alastair Lundy 2024</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/RuntimeExtensions</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>### Changes since 2.0.0 Preview 1
+        <PackageReleaseNotes>### Changes since 2.0.0 Preview 2
+* Made ``TargetFrameworkIdentification`` class static
+* Made ``RuntimeIdentification`` class static
+* Improved detection support for IOS, Android, and Tizen in programmatic Runtime ID generation
+* Replaced the ``GetPossibleRuntimeIdentifierCandidates`` method so that the new method returns an IEnumerable of strings instead of a Dictionary.
+* Renamed some methods in ``TargetFrameworkIdentification`` class
+* Made some methods in ``TargetFrameworkIdentification`` and ``RuntimeIdentification`` private that were protected
+* Added ``TargetFrameworkType`` enum
+* Added Target Framework Type detection
+* Improvements to framework version detection method in ``TargetFrameworkIdentification`` class
+* Fixed an issue with OS specific TFM detection
+* Fixed issues with generic TFM detection
+
+### Changes since OS Extensions 1.5.2
 * Add experimental Tizen support
-* Optimizations and improvements</PackageReleaseNotes>
+* Optimizations and improvements
+* Moved ``TargetFrameworkIdentification`` from PlatformKit and made it static along with other changes
+* Moved``RuntimeIdentification  from PlatformKit and made it static along with other changes
+* Namespace changes to AlastairLundy.Extensions.Runtime</PackageReleaseNotes>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
