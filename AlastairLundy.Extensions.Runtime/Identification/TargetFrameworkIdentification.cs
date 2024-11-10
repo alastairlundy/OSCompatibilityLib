@@ -252,9 +252,9 @@ public class TargetFrameworkIdentification
         }
         
         /// <summary>
-        /// 
+        /// Gets the version of the framework being used.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the version of the framework being used.</returns>
         public Version GetFrameworkVersion()
         {
             string frameworkDescription = RuntimeInformation.FrameworkDescription.ToLower();
@@ -274,7 +274,6 @@ public class TargetFrameworkIdentification
         /// Detect the Target Framework Moniker (TFM) of the currently running system.
         /// Note: This does not detect .NET Standard TFMs, UWP TFMs, Windows Phone TFMs, Silverlight TFMs, and Windows Store TFMs.
         ///
-        /// IOS and Android version specific TFM generation isn't supported at this time but may be added in a future release.
         /// </summary>
         /// <param name="targetFrameworkType">The type of TFM to generate.</param>
         /// <returns></returns>
