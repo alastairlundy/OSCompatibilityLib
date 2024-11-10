@@ -462,6 +462,15 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("freebsd")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [UnsupportedOSPlatform("browser")]
+#endif
         public static string GetRuntimeIdentifier()
         {
             if (OperatingSystem.IsLinux())
@@ -475,7 +484,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// <summary>
         /// Detects possible Runtime Identifiers that could be applicable to the system calling the method.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>all Runtime Identifiers that are applicable for the system calling the method.</returns>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
         [SupportedOSPlatform("macos")]
@@ -487,22 +496,21 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         [SupportedOSPlatform("watchos")]
         [UnsupportedOSPlatform("browser")]
 #endif
-        public static Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
+        public static IEnumerable<string> GetPossibleRuntimeIdentifierCandidates()
         {
-            Dictionary<RuntimeIdentifierType, string> possibilities = new Dictionary<RuntimeIdentifierType, string>
-            {
-                { RuntimeIdentifierType.AnyGeneric, GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric) },
-                { RuntimeIdentifierType.Generic, GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic) },
-                { RuntimeIdentifierType.Specific, GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific) }
-            };
+            List<string> output = new List<string>();
 
+            output.Add(GenerateRuntimeIdentifier(RuntimeIdentifierType.AnyGeneric));
+            output.Add(GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic));
+            output.Add(GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific));
+            
             if (OperatingSystem.IsLinux())
             {
-                possibilities.Add(RuntimeIdentifierType.VersionLessDistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, false));
-                possibilities.Add(RuntimeIdentifierType.DistroSpecific,GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific));
+                output.Add(GenerateRuntimeIdentifier(RuntimeIdentifierType.VersionLessDistroSpecific));
+                output.Add(GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific, true, true));
             }
 
-            return possibilities;
+            return output;
         }
     }
 }
