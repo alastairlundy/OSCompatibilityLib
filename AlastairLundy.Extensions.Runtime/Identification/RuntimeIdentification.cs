@@ -181,6 +181,10 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 {
                     osName = "ios";
                 }
+                if (OperatingSystemExtensions.IsTizen())
+                {
+                    osName = "tizen";
+                }
                 if (OperatingSystem.IsTvOS())
                 {
                     osName = "tvos";
