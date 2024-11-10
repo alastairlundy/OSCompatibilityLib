@@ -25,8 +25,9 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
-
+using AlastairLundy.Extensions.System;
 using AlastairLundy.Extensions.System.Strings.Versioning;
+
 // ReSharper disable MemberCanBePrivate.Global
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
@@ -51,7 +52,7 @@ public class TargetFrameworkIdentification
     // ReSharper disable once InconsistentNaming
     protected string GetNetTFM()
     {
-        Version frameworkVersion = GetDotNetVersion();
+        Version frameworkVersion = GetFrameworkVersion();
         StringBuilder stringBuilder = new StringBuilder();
         
         stringBuilder.Append("net");
@@ -66,7 +67,7 @@ public class TargetFrameworkIdentification
     protected string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
     {
 #if NET6_0_OR_GREATER
-        Version frameworkVersion = GetDotNetVersion();
+        Version frameworkVersion = GetFrameworkVersion();
 #endif
         
         StringBuilder stringBuilder = new StringBuilder();
@@ -157,7 +158,7 @@ public class TargetFrameworkIdentification
     // ReSharper disable once InconsistentNaming
         protected string GetNetCoreTFM()
         {
-            Version frameworkVersion = GetDotNetVersion();
+            Version frameworkVersion = GetFrameworkVersion();
             
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("netcoreapp");
@@ -172,7 +173,7 @@ public class TargetFrameworkIdentification
         // ReSharper disable once InconsistentNaming
         protected string GetNetFrameworkTFM()
         {
-            Version frameworkVersion = GetDotNetVersion();
+            Version frameworkVersion = GetFrameworkVersion();
             
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append(frameworkVersion.Major);
@@ -213,8 +214,24 @@ public class TargetFrameworkIdentification
         public Version GetDotNetVersion()
         {
             return new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", string.Empty)
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Version GetFrameworkVersion()
+        {
+            string frameworkDescription = RuntimeInformation.FrameworkDescription.ToLower();
+            
+            string versionString = frameworkDescription
+                .Replace(".net", string.Empty)
                 .Replace("core", string.Empty)
-                .Replace(" ", string.Empty).AddMissingZeroes());
+                .Replace("framework", string.Empty)
+                .Replace("mono", string.Empty)
+                .Replace("xamarin", string.Empty)
+                .Replace(" ", string.Empty).AddMissingZeroes(numberOfZeroesNeeded: 3);
+            
+            return Version.Parse(versionString);
         }
     
         /// <summary>
@@ -228,7 +245,7 @@ public class TargetFrameworkIdentification
         /// <exception cref="PlatformNotSupportedException"></exception>
         public string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
-            Version frameworkVersion = GetDotNetVersion();
+            Version frameworkVersion = GetFrameworkVersion();
             
             if (RuntimeInformation.FrameworkDescription.ToLower().Contains("core"))
             {
