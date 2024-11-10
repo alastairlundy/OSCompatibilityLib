@@ -74,7 +74,8 @@ public static class TargetFrameworkIdentification
 #endif
         
         StringBuilder stringBuilder = new StringBuilder();
-
+        stringBuilder.Append(GetNetTFM());
+        
         if (OperatingSystem.IsMacOS())
         {
             stringBuilder.Append('-');
