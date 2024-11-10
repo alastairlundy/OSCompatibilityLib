@@ -281,8 +281,6 @@ public class TargetFrameworkIdentification
         /// <exception cref="PlatformNotSupportedException"></exception>
         public string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
-            Version frameworkVersion = GetFrameworkVersion();
-
             TargetFrameworkType frameworkType = GetFrameworkType();
             
             if (frameworkType == TargetFrameworkType.DotNetCore)
