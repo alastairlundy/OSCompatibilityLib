@@ -192,15 +192,18 @@ public class TargetFrameworkIdentification
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("mono");
-                    
-            if(OperatingSystem.IsMacOS())
+            
+            if (OperatingSystem.IsAndroid())
             {
-                stringBuilder.Append("mac");
-            }
-            else if (OperatingSystem.IsAndroid())
-            {
+                stringBuilder.Append('-');
                 stringBuilder.Append("android");
             }
+            else if(OperatingSystem.IsIOS())
+            {
+                stringBuilder.Append('-');
+                stringBuilder.Append("ios");
+            }
+            
             return stringBuilder.ToString();
         }
 
@@ -243,7 +246,6 @@ public class TargetFrameworkIdentification
             return (GetFrameworkType(), GetFrameworkVersion());
         }
         
-
         /// <summary>
         /// 
         /// </summary>
