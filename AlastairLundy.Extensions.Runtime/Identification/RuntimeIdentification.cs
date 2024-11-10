@@ -58,7 +58,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.
     /// </summary>
-    public class RuntimeIdentification
+    public static class RuntimeIdentification
     {
         
         /// <summary>
@@ -66,7 +66,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        protected string GetArchitectureString()
+        private static string GetArchitectureString()
         {
 #if NET5_0_OR_GREATER
             return RuntimeInformation.OSArchitecture switch
@@ -107,7 +107,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("linux")]
 #endif
-        private string GetOsReleasePropertyValue(string propertyName)
+        private static string GetOsReleasePropertyValue(string propertyName)
         {
             if (OperatingSystem.IsLinux())
             {
@@ -147,7 +147,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         [SupportedOSPlatform("android")]
         [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
 #endif
-        protected string GetOsNameString(RuntimeIdentifierType identifierType)
+        private static string GetOsNameString(RuntimeIdentifierType identifierType)
         {
 #if NET5_0_OR_GREATER
             string? osName = null;
@@ -173,7 +173,6 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 {
                     osName = "freebsd";
                 }
-#if NET6_0_OR_GREATER
                 if (OperatingSystem.IsAndroid())
                 {
                     osName = "android";
@@ -191,7 +190,6 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 {
                     osName = "watchos";
                 }
-#endif
                 if (OperatingSystem.IsLinux())
                 {
                     if (identifierType == RuntimeIdentifierType.Generic)
@@ -226,7 +224,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        internal string GetOsVersionString()
+        internal static string GetOsVersionString()
         {
 #if NET5_0_OR_GREATER
             string? osVersion = null;
@@ -349,7 +347,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         [SupportedOSPlatform("watchos")]
         [UnsupportedOSPlatform("browser")]
 #endif
-        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
+        public static string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType)
         {
             if (identifierType == RuntimeIdentifierType.AnyGeneric)
             {
@@ -389,7 +387,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         [SupportedOSPlatform("watchos")]
         [UnsupportedOSPlatform("browser")]
 #endif
-        public string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
+        public static string GenerateRuntimeIdentifier(RuntimeIdentifierType identifierType, bool includeOperatingSystemName, bool includeOperatingSystemVersion)
         {
             string osName = GetOsNameString(identifierType);
             string cpuArch = GetArchitectureString();
@@ -461,7 +459,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once InconsistentNaming
-        public string GetRuntimeIdentifier()
+        public static string GetRuntimeIdentifier()
         {
 #if NET5_0_OR_GREATER
             return RuntimeInformation.RuntimeIdentifier;
@@ -490,7 +488,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         [SupportedOSPlatform("watchos")]
         [UnsupportedOSPlatform("browser")]
 #endif
-        public Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
+        public static Dictionary<RuntimeIdentifierType, string> GetPossibleRuntimeIdentifierCandidates()
         {
             Dictionary<RuntimeIdentifierType, string> possibilities = new Dictionary<RuntimeIdentifierType, string>
             {

@@ -43,12 +43,9 @@ namespace AlastairLundy.Extensions.Runtime.Identification {
 /// </summary>
 public class TargetFrameworkIdentification
 {
-    // ReSharper disable once InconsistentNaming
-    protected readonly RuntimeIdentification runtimeIdentification;
     
     public TargetFrameworkIdentification()
     {
-        runtimeIdentification = new RuntimeIdentification();
     }
     
     // ReSharper disable once InconsistentNaming
@@ -82,7 +79,7 @@ public class TargetFrameworkIdentification
             if (targetFrameworkMonikerType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
             {
                 stringBuilder.Append('.');
-                stringBuilder.Append(runtimeIdentification.GetOsVersionString());
+                stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
             }
         }
 #if NET5_0_OR_GREATER
@@ -106,7 +103,7 @@ public class TargetFrameworkIdentification
                 
                 if (isAtLeastWin8 || isAtLeastWin8Point1)
                 {
-                    stringBuilder.Append(runtimeIdentification.GetOsVersionString());
+                    stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
                 }
                 else if (isAtLeastWin10V1607)
                 {
