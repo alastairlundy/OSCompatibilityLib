@@ -280,31 +280,30 @@ public class TargetFrameworkIdentification
         public string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
             Version frameworkVersion = GetFrameworkVersion();
+
+            TargetFrameworkType frameworkType = GetFrameworkType();
             
-            if (RuntimeInformation.FrameworkDescription.ToLower().Contains("core"))
+            if (frameworkType == TargetFrameworkType.DotNetCore)
             {
                 return GetNetCoreTFM();
             }
-            else if (RuntimeInformation.FrameworkDescription.ToLower().Contains("mono"))
+            else if (frameworkType == TargetFrameworkType.Mono)
             {
                 return GetMonoTFM();
             }
-            else
+            else if (frameworkType == TargetFrameworkType.DotNetFramework)
             {
-                if (RuntimeInformation.FrameworkDescription.ToLower().Contains(".net"))
+                return GetNetFrameworkTFM();
+            }
+            else if (frameworkType == TargetFrameworkType.DotNet)
+            {
+                if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
                 {
-                    if (frameworkVersion.Major < 5)
-                    {
-                        return GetNetFrameworkTFM();
-                    }
-                    if (targetFrameworkType == TargetFrameworkMonikerType.Generic)
-                    {
+                    return GetOsSpecificNetTFM(targetFrameworkType);
+                }
+                else
+                {
                         return GetNetTFM();
-                    }
-                    if(targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemSpecific || targetFrameworkType == TargetFrameworkMonikerType.OperatingSystemVersionSpecific)
-                    {
-                        return GetOsSpecificNetTFM(targetFrameworkType);
-                    }
                 }
             }
 
