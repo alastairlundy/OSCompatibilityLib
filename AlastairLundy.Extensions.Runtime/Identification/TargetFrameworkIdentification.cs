@@ -41,21 +41,16 @@ namespace AlastairLundy.Extensions.Runtime.Identification {
 /// <summary>
 /// A class to manage Target Framework detection
 /// </summary>
-public class TargetFrameworkIdentification
+public static class TargetFrameworkIdentification
 {
     
-    public TargetFrameworkIdentification()
-    {
-    }
-    
     // ReSharper disable once InconsistentNaming
-    protected string GetNetTFM()
+    private static string GetNetTFM()
     {
         Version frameworkVersion = GetFrameworkVersion();
         StringBuilder stringBuilder = new StringBuilder();
         
         stringBuilder.Append("net");
-
         stringBuilder.Append(frameworkVersion.Major);
         stringBuilder.Append('.');
         stringBuilder.Append(frameworkVersion.Minor);
@@ -63,7 +58,7 @@ public class TargetFrameworkIdentification
     }
 
     // ReSharper disable once InconsistentNaming
-    protected string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
+    private static string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
     {
 #if NET6_0_OR_GREATER
         Version frameworkVersion = GetFrameworkVersion();
@@ -154,7 +149,7 @@ public class TargetFrameworkIdentification
     }
 
     // ReSharper disable once InconsistentNaming
-        protected string GetNetCoreTFM()
+        private static string GetNetCoreTFM()
         {
             Version frameworkVersion = GetFrameworkVersion();
             
@@ -169,7 +164,7 @@ public class TargetFrameworkIdentification
         }
 
         // ReSharper disable once InconsistentNaming
-        protected string GetNetFrameworkTFM()
+        private static string GetNetFrameworkTFM()
         {
             Version frameworkVersion = GetFrameworkVersion();
             
@@ -186,7 +181,7 @@ public class TargetFrameworkIdentification
         }
 
         // ReSharper disable once InconsistentNaming
-        protected string GetMonoTFM()
+        private static string GetMonoTFM()
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("mono");
@@ -209,7 +204,7 @@ public class TargetFrameworkIdentification
         /// Gets the type of Target Framework that is currently running.
         /// </summary>
         /// <returns>the type of Target Framework that is currently running.</returns>
-        public TargetFrameworkType GetFrameworkType()
+        public static TargetFrameworkType GetFrameworkType()
         {
             string frameworkDescription = RuntimeInformation.FrameworkDescription.ToLower();
             
@@ -239,7 +234,7 @@ public class TargetFrameworkIdentification
         /// 
         /// </summary>
         /// <returns></returns>
-        public (TargetFrameworkType frameworkType, Version frameworkVersion) GetFrameworkInformation()
+        public static (TargetFrameworkType frameworkType, Version frameworkVersion) GetFrameworkInformation()
         {
             return (GetFrameworkType(), GetFrameworkVersion());
         }
@@ -248,7 +243,7 @@ public class TargetFrameworkIdentification
         /// Gets the version of the framework being used.
         /// </summary>
         /// <returns>the version of the framework being used.</returns>
-        public Version GetFrameworkVersion()
+        public static Version GetFrameworkVersion()
         {
             string frameworkDescription = RuntimeInformation.FrameworkDescription.ToLower();
             
@@ -271,7 +266,7 @@ public class TargetFrameworkIdentification
         /// <param name="targetFrameworkType">The type of TFM to generate.</param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
-        public string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
+        public static string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
             TargetFrameworkType frameworkType = GetFrameworkType();
             
