@@ -33,14 +33,13 @@ using System.Collections.Generic;
 
 #if NET5_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
+
+using System.Runtime.Versioning;
+
 #endif
 
 using System.IO;
 using System.Runtime.InteropServices;
-
-#if NET5_0_OR_GREATER
-using System.Runtime.Versioning;
-#endif
 
 using AlastairLundy.Extensions.Runtime.Identification.Exceptions;
 using AlastairLundy.Extensions.Runtime.Internal.Localizations;
