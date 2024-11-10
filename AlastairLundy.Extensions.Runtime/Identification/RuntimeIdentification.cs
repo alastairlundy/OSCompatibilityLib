@@ -369,7 +369,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 return GenerateRuntimeIdentifier(identifierType, true, true);
             }
 
-            throw new ArgumentException();
+            return GenerateRuntimeIdentifier(RuntimeIdentifierType.Generic, true, false);
         }
         
         /// <summary>
