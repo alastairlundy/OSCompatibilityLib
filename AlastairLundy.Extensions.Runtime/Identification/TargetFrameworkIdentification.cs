@@ -178,6 +178,8 @@ public static class TargetFrameworkIdentification
             Version frameworkVersion = GetFrameworkVersion();
             
             StringBuilder stringBuilder = new StringBuilder();
+
+            stringBuilder.Append("net");
             stringBuilder.Append(frameworkVersion.Major);
             stringBuilder.Append(frameworkVersion.Minor);
                                                     
@@ -299,7 +301,7 @@ public static class TargetFrameworkIdentification
                 }
                 else
                 {
-                        return GetNetTFM();
+                    return GetNetTFM();
                 }
             }
 
