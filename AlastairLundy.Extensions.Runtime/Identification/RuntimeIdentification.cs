@@ -189,7 +189,6 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 {
                     osName = "tvos";
                 }
-
                 if (OperatingSystem.IsWatchOS())
                 {
                     osName = "watchos";
