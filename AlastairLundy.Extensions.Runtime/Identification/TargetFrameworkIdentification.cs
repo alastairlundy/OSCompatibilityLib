@@ -25,7 +25,9 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+
 using AlastairLundy.Extensions.System;
+
 using AlastairLundy.Extensions.System.Strings.Versioning;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -208,12 +210,44 @@ public class TargetFrameworkIdentification
         }
 
         /// <summary>
+        /// Gets the type of Target Framework that is currently running.
+        /// </summary>
+        /// <returns>the type of Target Framework that is currently running.</returns>
+        public TargetFrameworkType GetFrameworkType()
+        {
+            string frameworkDescription = RuntimeInformation.FrameworkDescription.ToLower();
+            
+            Version frameworkVersion = GetFrameworkVersion();
+            
+            if (frameworkDescription.Contains("mono"))
+            {
+                return TargetFrameworkType.Mono;
+            }
+            else if(frameworkDescription.Contains("framework") ||
+                    (frameworkVersion.IsOlderThan(new Version(5,0,0)) 
+                     && frameworkDescription.Contains("mono") == false
+                    && frameworkDescription.Contains("core") == false)){
+                return TargetFrameworkType.DotNetFramework;
+            }
+            else if (frameworkDescription.Contains("core"))
+            {
+                return TargetFrameworkType.DotNetCore;
+            }
+            else
+            {
+                return TargetFrameworkType.DotNet;
+            }
+        }
+        
+        /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public Version GetDotNetVersion()
+        public (TargetFrameworkType frameworkType, Version frameworkVersion) GetFrameworkInformation()
         {
-            return new Version(RuntimeInformation.FrameworkDescription.ToLower().Replace(".net", string.Empty)
+            return (GetFrameworkType(), GetFrameworkVersion());
+        }
+        
 
         /// <summary>
         /// 
