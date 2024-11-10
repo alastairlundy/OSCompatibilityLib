@@ -23,8 +23,6 @@
    */
 
 #if NETSTANDARD2_1 || NET5_0_OR_GREATER
-using AlastairLundy.Extensions.System.Strings.Versioning;
-
 #nullable enable
 
 // ReSharper disable once RedundantUsingDirective
@@ -50,6 +48,7 @@ using AlastairLundy.Extensions.Runtime.Identification.Exceptions;
 using AlastairLundy.Extensions.Runtime.Internal.Localizations;
 
 using AlastairLundy.Extensions.System;
+using AlastairLundy.Extensions.System.Strings.Versioning;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -285,7 +284,6 @@ namespace AlastairLundy.Extensions.Runtime.Identification
             {
                 osVersion = OperatingSystemExtensions.Version.ToString();
             }
-#if NETCOREAPP3_1_OR_GREATER            
             if (OperatingSystem.IsFreeBSD())
             {
                 osVersion = OperatingSystemExtensions.Version.ToString();
@@ -305,7 +303,6 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                         break;
                     }
             }
-#endif
             if (OperatingSystem.IsMacOS())
             {
                 bool isAtLeastHighSierra = OperatingSystem.IsMacOSVersionAtLeast(10, 13);
