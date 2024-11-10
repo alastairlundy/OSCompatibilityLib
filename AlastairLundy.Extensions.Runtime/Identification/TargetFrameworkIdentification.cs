@@ -118,10 +118,6 @@ public class TargetFrameworkIdentification
                 }
             }
         }
-        else if (OperatingSystem.IsLinux() || OperatingSystem.IsFreeBSD())
-        {
-            //Do nothing because Linux doesn't have a version specific TFM.
-        }
         else if (OperatingSystem.IsAndroid())
         {
             stringBuilder.Append('-');
