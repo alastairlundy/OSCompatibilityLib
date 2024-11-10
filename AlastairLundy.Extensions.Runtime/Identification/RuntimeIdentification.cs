@@ -464,16 +464,12 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         // ReSharper disable once InconsistentNaming
         public static string GetRuntimeIdentifier()
         {
-#if NET5_0_OR_GREATER
-            return RuntimeInformation.RuntimeIdentifier;
-#else
             if (OperatingSystem.IsLinux())
             {
                 return GenerateRuntimeIdentifier(RuntimeIdentifierType.DistroSpecific);
             }
 
             return GenerateRuntimeIdentifier(RuntimeIdentifierType.Specific);
-#endif
         }
 
         /// <summary>
