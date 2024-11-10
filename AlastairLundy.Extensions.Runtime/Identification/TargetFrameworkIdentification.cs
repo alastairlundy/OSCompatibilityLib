@@ -43,7 +43,10 @@ namespace AlastairLundy.Extensions.Runtime.Identification {
 /// </summary>
 public static class TargetFrameworkIdentification
 {
-    
+    /// <summary>
+    /// Generates a .NET (5+) generic TFM.
+    /// </summary>
+    /// <returns>the .NET (5+) generic TFM.</returns>
     // ReSharper disable once InconsistentNaming
     private static string GetNetTFM()
     {
@@ -57,6 +60,12 @@ public static class TargetFrameworkIdentification
         return stringBuilder.ToString();
     }
 
+    /// <summary>
+    /// Generates the .NET (5+/Core 3.1) operating system specificTFM.
+    /// </summary>
+    /// <param name="targetFrameworkMonikerType"></param>
+    /// <returns>the .NET (5+ or Core 3.1) operating system specific TFM.</returns>
+    /// <exception cref="PlatformNotSupportedException">Thrown if run on an unsupported platform.</exception>
     // ReSharper disable once InconsistentNaming
     private static string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
     {
@@ -231,9 +240,9 @@ public static class TargetFrameworkIdentification
         }
         
         /// <summary>
-        /// 
+        /// Gets the Target Framework type and version.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the target framework type and version as a tuple.</returns>
         public static (TargetFrameworkType frameworkType, Version frameworkVersion) GetFrameworkInformation()
         {
             return (GetFrameworkType(), GetFrameworkVersion());
@@ -257,15 +266,15 @@ public static class TargetFrameworkIdentification
             
             return Version.Parse(versionString);
         }
-    
+        
         /// <summary>
         /// Detect the Target Framework Moniker (TFM) of the currently running system.
         /// Note: This does not detect .NET Standard TFMs, UWP TFMs, Windows Phone TFMs, Silverlight TFMs, and Windows Store TFMs.
         ///
         /// </summary>
         /// <param name="targetFrameworkType">The type of TFM to generate.</param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <returns>the target framework moniker of the currently running system.</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if run on an unsupported platform.</exception>
         public static string GetTargetFrameworkMoniker(TargetFrameworkMonikerType targetFrameworkType)
         {
             TargetFrameworkType frameworkType = GetFrameworkType();

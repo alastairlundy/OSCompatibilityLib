@@ -336,9 +336,8 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// Note: Microsoft advises against programmatically creating Runtime IDs but this may be necessary in some instances.
         /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
-        /// <param name="identifierType"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
+        /// <param name="identifierType">The type of Runtime Identifier to generate.</param>
+        /// <returns>the programatically generated .NET Runtime Identifier.</returns>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
         [SupportedOSPlatform("macos")]
@@ -375,10 +374,11 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         
         /// <summary>
         /// Programmatically generates a .NET Runtime Identifier based on the system calling the method.
+        ///
         /// Note: Microsoft advises against programmatically creating Runtime IDs but this may be necessary in some instances.
-        /// For More Information Visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
+        /// For more information visit: https://learn.microsoft.com/en-us/dotnet/core/rid-catalog
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the programatically generated .NET Runtime Identifier.</returns>
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
         [SupportedOSPlatform("macos")]
@@ -458,9 +458,9 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         }
 
         /// <summary>
-        /// Detects the RuntimeID if running on .NET 5 or later and generates the generic RuntimeID if running on .NET Standard 2.0 or later.
+        /// Detects the RuntimeID based on the system calling the method.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>the Runtime ID of system calling the method as a string.</returns>
         // ReSharper disable once InconsistentNaming
 #if NET5_0_OR_GREATER
         [SupportedOSPlatform("windows")]
