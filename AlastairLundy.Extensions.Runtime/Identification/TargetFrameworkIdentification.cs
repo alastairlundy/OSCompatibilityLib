@@ -142,6 +142,11 @@ public class TargetFrameworkIdentification
             stringBuilder.Append('-');
             stringBuilder.Append("watchos");
         }
+        else if (OperatingSystemExtensions.IsTizen())
+        {
+            stringBuilder.Append('-');
+            stringBuilder.Append("tizen");
+        }
 #if NET8_0_OR_GREATER
         if (frameworkVersion.Major >= 8)
         {
