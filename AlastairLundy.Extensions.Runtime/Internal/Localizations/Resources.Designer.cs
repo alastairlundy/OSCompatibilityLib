@@ -69,6 +69,15 @@ namespace AlastairLundy.Extensions.Runtime.Internal.Localizations {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This platform is a legacy or End Of Life Operating System and is not supported..
+        /// </summary>
+        internal static string Exceptions_PlatformNotSupported_EndOfLifeOperatingSystem {
+            get {
+                return ResourceManager.GetString("Exceptions.PlatformNotSupported.EndOfLifeOperatingSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This function or feature is only supported on FreeBSD based operating systems..
         /// </summary>
         internal static string Exceptions_PlatformNotSupported_FreeBsdOnly {

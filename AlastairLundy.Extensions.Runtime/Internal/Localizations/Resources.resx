@@ -39,4 +39,7 @@
     <data name="Exceptions.RuntimeIdentifierGeneration" xml:space="preserve">
         <value>Failed to generate the RuntimeIdentifier given the specified parameters.</value>
     </data>
+    <data name="Exceptions.PlatformNotSupported.EndOfLifeOperatingSystem" xml:space="preserve">
+        <value>This platform is a legacy or End Of Life Operating System and is not supported.</value>
+    </data>
 </root>
