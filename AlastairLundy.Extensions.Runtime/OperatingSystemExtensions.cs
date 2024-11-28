@@ -31,7 +31,6 @@ using System.Runtime.Versioning;
 
 using AlastairLundy.Extensions.Runtime.Identification;
 
-using AlastairLundy.Extensions.System;
 // ReSharper disable MemberCanBePrivate.Global
 
 // ReSharper disable InconsistentNaming
@@ -303,12 +302,22 @@ namespace AlastairLundy.Extensions.Runtime
         /// <param name="build"></param>
         /// <param name="revision"></param>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
         public static bool IsWindowsVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        {
+            return IsWindowsVersionAtLeast(new Version(major, minor, build, revision));
+        }
+        
+        /// <summary>
+        /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
+        /// </summary>
+        /// <param name="versionToCompare"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public static bool IsWindowsVersionAtLeast(Version versionToCompare)
         {
             if (IsWindows())
             {
-                return PlatformID.Win32NT.GetSystem().Version.IsAtLeast(new Version(major, minor, build, revision));
+                return versionToCompare >= PlatformID.Win32NT.GetSystem().Version;
             }
 
             throw new PlatformNotSupportedException();
@@ -322,13 +331,23 @@ namespace AlastairLundy.Extensions.Runtime
         /// <param name="build"></param>
         /// <param name="revision"></param>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
+            return IsMacOSVersionAtLeast(new Version(major, minor, build, revision));
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="versionToCompare"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public static bool IsMacOSVersionAtLeast(Version versionToCompare)
+        {
             if (IsMacOS())
             {
-                return PlatformID.MacOSX.GetSystem().Version.IsAtLeast(new Version(major, minor, build, revision));
+                return versionToCompare >= PlatformID.MacOSX.GetSystem().Version;
             }
 
             throw new PlatformNotSupportedException();
@@ -342,12 +361,22 @@ namespace AlastairLundy.Extensions.Runtime
         /// <param name="build"></param>
         /// <param name="revision"></param>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
         public static bool IsLinuxVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        {
+            return IsLinuxVersionAtLeast(new Version(major, minor, build, revision));
+        }
+        
+        /// <summary>
+        /// Checks to see whether the specified version of Linux is the same or newer than the installed version of Linux.
+        /// </summary>
+        /// <param name="versionToCompare"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        public static bool IsLinuxVersionAtLeast(Version versionToCompare)
         {
             if (IsLinux())
             {
-                return PlatformID.Unix.GetSystem().Version.IsAtLeast(new Version(major, minor, build, revision));
+                return versionToCompare >= PlatformID.Unix.GetSystem().Version;
             }
 
             throw new PlatformNotSupportedException();
@@ -365,9 +394,21 @@ namespace AlastairLundy.Extensions.Runtime
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSDVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
+            return IsFreeBSDVersionAtLeast(new Version(major, minor, build, revision));
+        }
+
+        /// <summary>
+        /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of FreeBSD.
+        /// </summary>
+        /// <param name="versionToCompare">The version to be compared</param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+        // ReSharper disable once InconsistentNaming
+        public static bool IsFreeBSDVersionAtLeast(Version versionToCompare)
+        {
             if (IsFreeBSD())
             {
-                return PlatformID.Unix.GetSystem().Version.IsAtLeast(new Version(major, minor, build, revision));
+                return versionToCompare >= PlatformID.Unix.GetSystem().Version;
             }
 
             throw new PlatformNotSupportedException();
