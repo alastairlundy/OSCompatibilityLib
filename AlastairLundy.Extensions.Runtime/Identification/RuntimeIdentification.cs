@@ -252,19 +252,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 else if (!isWindows10 && !isWindows11)
                 {
-                    switch (OperatingSystem.Version.Build)
-                    {
-                        case 9200:
-                            osVersion = "8";
-                            break;
-                        case 9600:
-                            osVersion = "81";
-                            break;
-                        default:
-                            throw new PlatformNotSupportedException(Resources
-                                .Exceptions_PlatformNotSupported_WindowsOnly);
-                    }
-                    
+                    throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_EndOfLifeOperatingSystem);
                 }
             }
             if (OperatingSystem.IsLinux())
