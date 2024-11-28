@@ -315,7 +315,7 @@ namespace AlastairLundy.Extensions.Runtime
         }
 
         /// <summary>
-        /// Checks to see whether the specified version of macOS is the same or newer than the installed version of Windows.
+        /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
         /// </summary>
         /// <param name="major"></param>
         /// <param name="minor"></param>
@@ -335,7 +335,7 @@ namespace AlastairLundy.Extensions.Runtime
         }
 
         /// <summary>
-        /// Checks to see whether the specified version of Linux is the same or newer than the installed version of Windows.
+        /// Checks to see whether the specified version of Linux is the same or newer than the installed version of Linux.
         /// </summary>
         /// <param name="major"></param>
         /// <param name="minor"></param>
@@ -354,7 +354,7 @@ namespace AlastairLundy.Extensions.Runtime
         }
 
         /// <summary>
-        /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of Windows.
+        /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of FreeBSD.
         /// </summary>
         /// <param name="major"></param>
         /// <param name="minor"></param>
