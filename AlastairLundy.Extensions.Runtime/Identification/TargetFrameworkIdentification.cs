@@ -27,7 +27,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 using AlastairLundy.Extensions.System;
-
 using AlastairLundy.Extensions.System.Strings.Versioning;
 
 // ReSharper disable MemberCanBePrivate.Global
