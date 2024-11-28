@@ -30,6 +30,7 @@ using System.Runtime.Versioning;
 #endif
 
 using AlastairLundy.Extensions.Runtime.Identification;
+using AlastairLundy.Extensions.Runtime.Internal.Localizations;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -219,12 +220,22 @@ namespace AlastairLundy.Extensions.Runtime
             return IsAndroid();
         }
 
+        /// <summary>
+        /// Returns whether the operating system that is running is based on Android TV.
+        /// </summary>
+        /// <returns>true if the Operating System being run is based on Android TV; returns false otherwise.</returns>
+
         public static bool IsAndroidTV()
         {
             // ReSharper disable once RedundantBoolCompare
             return RuntimeInformation.OSDescription.ToLower().Contains("android") && RuntimeInformation.OSDescription.ToLower().Contains("tv") == true;
         }
 
+        /// <summary>
+        /// Returns whether the operating system that is running is based on Android TV.
+        /// </summary>
+        /// <param name="operatingSystem"></param>
+        /// <returns>true if the Operating System being run is based on Android TV; returns false otherwise.</returns>
         public static bool IsAndroidTV(this OperatingSystem operatingSystem)
         {
             return IsAndroidTV();
@@ -233,7 +244,7 @@ namespace AlastairLundy.Extensions.Runtime
         /// <summary>
         /// Returns whether the operating system that is running is based on watchOS.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is based on Watch OS; returns false otherwise.</returns>
         public static bool IsWatchOS()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("watchos");
@@ -243,7 +254,7 @@ namespace AlastairLundy.Extensions.Runtime
         /// Returns whether the operating system that is running is based on watchOS.
         /// </summary>
         /// <param name="operatingSystem"></param>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is based on Watch OS; returns false otherwise.</returns>
         public static bool IsWatchOS(this OperatingSystem operatingSystem)
         {
             return IsWatchOS();
@@ -252,7 +263,7 @@ namespace AlastairLundy.Extensions.Runtime
         /// <summary>
         /// Returns whether the operating system that is running is based on wearOS.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is based on Wear OS; returns false otherwise.</returns>
         public static bool IsWearOS()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("wearos");
@@ -262,7 +273,7 @@ namespace AlastairLundy.Extensions.Runtime
         /// 
         /// </summary>
         /// <param name="operatingSystem"></param>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is based on Wear OS; returns false otherwise.</returns>
         public static bool IsWearOS(this OperatingSystem operatingSystem)
         {
             return IsWearOS();
@@ -271,7 +282,7 @@ namespace AlastairLundy.Extensions.Runtime
         /// <summary>
         /// Returns whether the operating system that is running is based on tvOS.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is based on tvOS; returns false otherwise.</returns>
         public static bool IsTvOS()
         {
             if(RuntimeInformation.OSDescription.ToLower().Contains("tvos") && RuntimeInformation.OSDescription.ToLower().Contains("android"))
@@ -288,7 +299,7 @@ namespace AlastairLundy.Extensions.Runtime
         /// Returns whether the operating system that is running is based on tvOS.
         /// </summary>
         /// <param name="operatingSystem"></param>
-        /// <returns></returns>
+        /// <returns>true if the Operating System being run is based on tvOS; returns false otherwise.</returns>
         public static bool IsTvOS(this OperatingSystem operatingSystem)
         {
             return IsTvOS();
@@ -297,11 +308,11 @@ namespace AlastairLundy.Extensions.Runtime
         /// <summary>
         /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
         /// </summary>
-        /// <param name="major"></param>
-        /// <param name="minor"></param>
-        /// <param name="build"></param>
-        /// <param name="revision"></param>
-        /// <returns></returns>
+        /// <param name="major">The major version of the version to be compared.</param>
+        /// <param name="minor">The minor version of the version to be compared.</param>
+        /// <param name="build">The build version of the version to be compared.</param>
+        /// <param name="revision">The revision version of the version to be compared</param>
+        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
         public static bool IsWindowsVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
             return IsWindowsVersionAtLeast(new Version(major, minor, build, revision));
@@ -310,9 +321,9 @@ namespace AlastairLundy.Extensions.Runtime
         /// <summary>
         /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
         /// </summary>
-        /// <param name="versionToCompare"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <param name="versionToCompare">The version to be compared.</param>
+        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if the operating system being run is not based on Windows.</exception>
         public static bool IsWindowsVersionAtLeast(Version versionToCompare)
         {
             if (IsWindows())
@@ -320,17 +331,17 @@ namespace AlastairLundy.Extensions.Runtime
                 return versionToCompare >= PlatformID.Win32NT.GetSystem().Version;
             }
 
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
         }
 
         /// <summary>
         /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
         /// </summary>
-        /// <param name="major"></param>
-        /// <param name="minor"></param>
-        /// <param name="build"></param>
-        /// <param name="revision"></param>
-        /// <returns></returns>
+        /// <param name="major">The major version of the version to be compared.</param>
+        /// <param name="minor">The minor version of the version to be compared.</param>
+        /// <param name="build">The build version of the version to be compared.</param>
+        /// <param name="revision">The revision version of the version to be compared</param>
+        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
@@ -338,11 +349,11 @@ namespace AlastairLundy.Extensions.Runtime
         }
         
         /// <summary>
-        /// 
+        /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
         /// </summary>
-        /// <param name="versionToCompare"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <param name="versionToCompare">The version to be compared.</param>
+        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if the operating system being run is not based on macOS.</exception>
         public static bool IsMacOSVersionAtLeast(Version versionToCompare)
         {
             if (IsMacOS())
@@ -350,17 +361,17 @@ namespace AlastairLundy.Extensions.Runtime
                 return versionToCompare >= PlatformID.MacOSX.GetSystem().Version;
             }
 
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_MacOnly);
         }
 
         /// <summary>
         /// Checks to see whether the specified version of Linux is the same or newer than the installed version of Linux.
         /// </summary>
-        /// <param name="major"></param>
-        /// <param name="minor"></param>
-        /// <param name="build"></param>
-        /// <param name="revision"></param>
-        /// <returns></returns>
+        /// <param name="major">The major version of the version to be compared.</param>
+        /// <param name="minor">The minor version of the version to be compared.</param>
+        /// <param name="build">The build version of the version to be compared.</param>
+        /// <param name="revision">The revision version of the version to be compared</param>
+        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
         public static bool IsLinuxVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
             return IsLinuxVersionAtLeast(new Version(major, minor, build, revision));
@@ -370,8 +381,8 @@ namespace AlastairLundy.Extensions.Runtime
         /// Checks to see whether the specified version of Linux is the same or newer than the installed version of Linux.
         /// </summary>
         /// <param name="versionToCompare"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if the operating system being run is not based on Linux.</exception>
         public static bool IsLinuxVersionAtLeast(Version versionToCompare)
         {
             if (IsLinux())
@@ -379,18 +390,17 @@ namespace AlastairLundy.Extensions.Runtime
                 return versionToCompare >= PlatformID.Unix.GetSystem().Version;
             }
 
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
         }
 
         /// <summary>
         /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of FreeBSD.
         /// </summary>
-        /// <param name="major"></param>
-        /// <param name="minor"></param>
-        /// <param name="build"></param>
-        /// <param name="revision"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <param name="major">The major version of the version to be compared.</param>
+        /// <param name="minor">The minor version of the version to be compared.</param>
+        /// <param name="build">The build version of the version to be compared.</param>
+        /// <param name="revision">The revision version of the version to be compared</param>
+        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSDVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
@@ -401,8 +411,8 @@ namespace AlastairLundy.Extensions.Runtime
         /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of FreeBSD.
         /// </summary>
         /// <param name="versionToCompare">The version to be compared</param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
+        /// <exception cref="PlatformNotSupportedException">Thrown if the operating system being run is not based on FreeBSD.</exception>
         // ReSharper disable once InconsistentNaming
         public static bool IsFreeBSDVersionAtLeast(Version versionToCompare)
         {
@@ -411,7 +421,7 @@ namespace AlastairLundy.Extensions.Runtime
                 return versionToCompare >= PlatformID.Unix.GetSystem().Version;
             }
 
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
         }
     }
 }
