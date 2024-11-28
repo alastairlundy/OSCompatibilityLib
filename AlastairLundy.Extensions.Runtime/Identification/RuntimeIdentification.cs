@@ -39,13 +39,13 @@ using System.Runtime.Versioning;
 #endif
 
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 using AlastairLundy.Extensions.Runtime.Identification.Exceptions;
 using AlastairLundy.Extensions.Runtime.Internal.Localizations;
 
 using AlastairLundy.Extensions.System;
-using AlastairLundy.Extensions.System.Strings.Versioning;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -284,7 +284,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
             {
                 osVersion = OperatingSystemExtensions.Version.ToString();
                 
-                switch (osVersion.CountDotsInString())
+                switch (osVersion.Where(x => x == '.').Count())
                 {
                     case 3:
                         osVersion = osVersion.Remove(osVersion.Length - 4, 4);
