@@ -5,6 +5,8 @@
         <Title>AlastairLundy.Extensions.Runtime</Title>
         <Authors>AlastairLundy</Authors>
         <TargetFrameworks>net8.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageVersion>2.0.0</PackageVersion>
