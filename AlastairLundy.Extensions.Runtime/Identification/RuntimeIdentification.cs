@@ -35,7 +35,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
 using System.Runtime.Versioning;
-
 #endif
 
 using System.IO;
@@ -44,8 +43,6 @@ using System.Runtime.InteropServices;
 
 using AlastairLundy.Extensions.Runtime.Identification.Exceptions;
 using AlastairLundy.Extensions.Runtime.Internal.Localizations;
-
-using AlastairLundy.Extensions.System;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
@@ -237,7 +234,7 @@ namespace AlastairLundy.Extensions.Runtime.Identification
             if (OperatingSystem.IsWindows())
             {
                 bool isWindows10 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 10240) &&
-                                   OperatingSystemExtensions.Version.IsOlderThan(new Version(10, 0, 20349));
+                                   OperatingSystemExtensions.Version < new Version(10, 0, 20349);
                 
                 bool isWindows11 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000);
                 

@@ -23,11 +23,9 @@
    */
 
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-
-using AlastairLundy.Extensions.System;
-using AlastairLundy.Extensions.System.Strings.Versioning;
 
 // ReSharper disable MemberCanBePrivate.Global
 
@@ -226,7 +224,7 @@ public static class TargetFrameworkIdentification
                 return TargetFrameworkType.Mono;
             }
             else if(frameworkDescription.Contains("framework") ||
-                    (frameworkVersion.IsOlderThan(new Version(5,0,0)) 
+                    (frameworkVersion < new Version(5,0,0)
                      && frameworkDescription.Contains("mono") == false
                     && frameworkDescription.Contains("core") == false)){
                 return TargetFrameworkType.DotNetFramework;
@@ -264,7 +262,19 @@ public static class TargetFrameworkIdentification
                 .Replace("framework", string.Empty)
                 .Replace("mono", string.Empty)
                 .Replace("xamarin", string.Empty)
-                .Replace(" ", string.Empty).AddMissingZeroes(numberOfZeroesNeeded: 3);
+                .Replace(" ", string.Empty);
+
+            switch (versionString.Where(x => x == '.').Count())
+            {
+                case 3:
+                    break;
+                case 2:
+                    versionString += ".0";
+                    break;
+                case 1:
+                    versionString += ".0.0";
+                    break;
+            }
             
             return Version.Parse(versionString);
         }
