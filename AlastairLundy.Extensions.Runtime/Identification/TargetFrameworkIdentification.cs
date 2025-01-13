@@ -264,7 +264,7 @@ public static class TargetFrameworkIdentification
                 .Replace("xamarin", string.Empty)
                 .Replace(" ", string.Empty);
 
-            switch (versionString.Where(x => x == '.').Count())
+            switch (versionString.Count(x => x == '.'))
             {
                 case 3:
                     break;
