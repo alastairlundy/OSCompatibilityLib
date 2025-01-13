@@ -6,7 +6,7 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <PackageVersion>2.1.0</PackageVersion>
+        <PackageVersion>3.0.0</PackageVersion>
         <Description>Add OS detection support for Windows, macOS, Linux, and FreeBSD to .NET Stadard 2 projects and more.</Description>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
