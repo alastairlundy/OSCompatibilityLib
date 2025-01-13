@@ -1,18 +1,18 @@
 /*
         MIT License
-       
+
        Copyright (c) 2024 Alastair Lundy
-       
+
        Permission is hereby granted, free of charge, to any person obtaining a copy
        of this software and associated documentation files (the "Software"), to deal
        in the Software without restriction, including without limitation the rights
        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
        copies of the Software, and to permit persons to whom the Software is
        furnished to do so, subject to the following conditions:
-       
+
        The above copyright notice and this permission notice shall be included in all
        copies or substantial portions of the Software.
-       
+
        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,15 +26,19 @@
 // ReSharper disable UnusedMember.Global
 
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using AlastairLundy.OSCompatibilityLib.Helpers;
+using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
-using AlastairLundy.Polyfills.OperatingSystems.Helpers;
+// ReSharper disable SuggestVarOrType_BuiltInTypes
+// ReSharper disable ConvertIfStatementToReturnStatement
+// ReSharper disable ConvertIfStatementToConditionalTernaryExpression
+// ReSharper disable RedundantBoolCompare
 
-using AlastairLundy.Polyfills.OperatingSystems.Internal.Localizations;
-
-namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
+namespace AlastairLundy.OSCompatibilityLib.InteropServices
 {
     public static class RuntimeInformation
     {
@@ -42,39 +46,40 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
         /// 
         /// </summary>
         public static string FrameworkDescription { get; private set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public static string OSDescription { get; private set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public static Architecture OSArchitecture { get; private set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public static Architecture ProcessArchitecture { get; private set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
         public static string RuntimeIdentifier { get; private set; }
 
-        
+
         static RuntimeInformation()
         {
             GetArchitectureInfo();
-            
+
             RuntimeIdentifier = GetRuntimeIdentifier();
 
             FrameworkDescription = GetFrameworkDescription();
             OSDescription = Environment.OSVersion.VersionString;
         }
-        
+
         #region Framework Description code
+
         private static string GetFrameworkDescription()
         {
             try
@@ -89,12 +94,12 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
 
         private static string GetNewNewDescription()
         {
-            var winProcess =
+            Process winProcess =
                 ProcessRunner.CreateProcess($"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe",
                     "dotnet --version");
-            
-            var unixProcess = ProcessRunner.CreateProcess($"dotnet", "--version");
-            
+
+            Process unixProcess = ProcessRunner.CreateProcess($"dotnet", "--version");
+
             string release = "";
 
             if (OperatingSystem.IsWindows())
@@ -111,7 +116,7 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
             {
                 release = Environment.Version.ToString();
             }
-            
+
             bool releaseFound = Version.TryParse(release, out Version versionRelease);
 
             if (releaseFound)
@@ -133,21 +138,21 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
             {
                 return $".NET CLR {Environment.Version.ToString()}";
             }
-            
+
             return release;
         }
-        
+
         private static string GetNetFrameworkDescription()
         {
             int releaseKey;
-            
+
             const string subkey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
 
             string releaseKeyString = WinRegistrySearcher.GetValue(subkey, "Release");
-            
+
             string frameworkVersion = "";
-            
-            switch(int.Parse(releaseKeyString))
+
+            switch (int.Parse(releaseKeyString))
             {
                 case 394254 | 394271:
                     frameworkVersion = "4.6.1";
@@ -174,19 +179,21 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
                     frameworkVersion = Environment.Version.ToString();
                     break;
             }
-            
+
             return $".NET Framework {frameworkVersion}";
         }
+
         #endregion
-        
+
         private static void GetArchitectureInfo()
         {
             bool isArmBased;
-            
+
             if (OperatingSystem.IsWindows())
             {
                 string architectureString = ProcessRunner.RunProcess(
-                    ProcessRunner.CreateProcess($"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe", "systeminfo"));
+                    ProcessRunner.CreateProcess($"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe",
+                        "systeminfo"));
 
                 isArmBased = architectureString.ToLower().Contains("aarch");
             }
@@ -227,7 +234,7 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
                     OSArchitecture = Architecture.X86;
                 }
             }
-            
+
             if (Environment.Is64BitProcess)
             {
                 if (isArmBased == true)
@@ -251,62 +258,64 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
                 }
             }
         }
-        
+
         #region Runtime Identifier code
+
         private static string GetRuntimeIdentifier()
         {
             if (OperatingSystem.IsWindows())
             {
                 return $"{GetOsNameString()}{GetOsVersionString()}-{GetArchitectureString()}";
             }
-            else
-            {
-                return $"{GetOsNameString()}-{GetArchitectureString()}";
-            }
+
+            return $"{GetOsNameString()}-{GetArchitectureString()}";
         }
-        
+
         private static string GetOsNameString()
         {
             string osName = string.Empty;
-            
-                if (OperatingSystem.IsWindows())
-                {
-                    osName = "win";
-                }
-                if (OperatingSystem.IsMacOS())
-                {
-                    osName = "osx";
-                }
-                if (OperatingSystem.IsFreeBSD())
-                {
-                    osName = "freebsd";
-                }
-                if (OperatingSystem.IsAndroid())
-                {
-                    osName = "android";
-                }
-                if (OperatingSystem.IsIOS())
-                {
-                    osName = "ios";
-                }
-                if (OperatingSystem.IsTizen())
-                {
-                    osName = "tizen";
-                }
-                if (OperatingSystem.IsTvOS())
-                {
-                    osName = "tvos";
-                }
-                if (OperatingSystem.IsWatchOS())
-                {
-                    osName = "watchos";
-                }
-                if (OperatingSystem.IsLinux())
-                {
-                    osName = "linux";
-                }
-                // TODO Add Browser check here
-                
+
+            if (OperatingSystem.IsWindows())
+            {
+                osName = "win";
+            }
+
+            if (OperatingSystem.IsMacOS())
+            {
+                osName = "osx";
+            }
+
+            if (OperatingSystem.IsFreeBSD())
+            {
+                osName = "freebsd";
+            }
+
+            if (OperatingSystem.IsAndroid())
+            {
+                osName = "android";
+            }
+
+            if (OperatingSystem.IsIOS())
+            {
+                osName = "ios";
+            }
+
+            if (OperatingSystem.IsTvOS())
+            {
+                osName = "tvos";
+            }
+
+            if (OperatingSystem.IsWatchOS())
+            {
+                osName = "watchos";
+            }
+
+            if (OperatingSystem.IsLinux())
+            {
+                osName = "linux";
+            }
+            // TODO Add Browser check here
+
             if (osName == null || string.IsNullOrEmpty(osName))
             {
                 throw new PlatformNotSupportedException();
@@ -314,26 +323,23 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
 
             return osName;
         }
-              
-                /// <summary>
+
+        /// <summary>
         /// Returns the OS version as a string in the format that a RuntimeID uses.
         /// </summary>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException"></exception>
         private static string GetOsVersionString()
         {
-#if NET5_0_OR_GREATER
-            string? osVersion = null;
-#else
             string osVersion = string.Empty;
-#endif
+
             if (OperatingSystem.IsWindows())
             {
                 bool isWindows10 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 10240) &&
-                                   OperatingSystem.GetOsVersion() < new Version(10, 0, 20349);
-                
+                                   OperatingSystem.GetFallbackOsVersion() < new Version(10, 0, 20349);
+
                 bool isWindows11 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000);
-                
+
                 if (isWindows10)
                 {
                     osVersion = "10";
@@ -345,17 +351,20 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
                 // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 else if (!isWindows10 && !isWindows11)
                 {
-                    throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_EndOfLifeOperatingSystem);
+                    throw new PlatformNotSupportedException(Resources
+                        .Exceptions_PlatformNotSupported_EndOfLifeOperatingSystem);
                 }
             }
+
             if (OperatingSystem.IsLinux())
             {
-                osVersion = OperatingSystem.GetOsVersion().ToString();
+                osVersion = OperatingSystem.GetFallbackOsVersion().ToString();
             }
+
             if (OperatingSystem.IsFreeBSD())
             {
-                osVersion = OperatingSystem.GetOsVersion().ToString();
-                
+                osVersion = OperatingSystem.GetFallbackOsVersion().ToString();
+
                 switch (osVersion.Count(x => x == '.'))
                 {
                     case 3:
@@ -369,18 +378,18 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
                     case 0:
                         osVersion = $"{osVersion}.0";
                         break;
-                    }
+                }
             }
+
             if (OperatingSystem.IsMacOS())
             {
                 bool isAtLeastHighSierra = OperatingSystem.IsMacOSVersionAtLeast(10, 13);
 
-                Version version = OperatingSystem.GetOsVersion();
+                Version version = OperatingSystem.GetFallbackOsVersion();
 
                 if (isAtLeastHighSierra)
                 {
-                    
-                    if (OperatingSystem.IsMacOSVersionAtLeast(11))
+                    if (OperatingSystem.IsMacOSVersionAtLeast(11, 0))
                     {
                         osVersion = $"{version.Major}";
                     }
@@ -402,7 +411,7 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
 
             return osVersion;
         }
-                
+
         /// <summary>
         /// Returns the CPU architecture as a string in the format that a RuntimeID uses.
         /// </summary>
@@ -424,6 +433,7 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
                     throw new PlatformNotSupportedException();
             }
         }
+
         #endregion
 
         /// <summary>
@@ -439,25 +449,29 @@ namespace AlastairLundy.Polyfills.OperatingSystems.InteropServices
             {
                 return true;
             }
-            
+
             string platformName = platform.ToString().ToLower();
 
             if (platformName.Contains("freebsd") && OperatingSystem.IsFreeBSD())
             {
                 return true;
             }
+
             if (platformName.Contains("android") && OperatingSystem.IsAndroid())
             {
                 return true;
             }
+
             if (platformName.Contains("ios") && OperatingSystem.IsIOS())
             {
                 return true;
             }
+
             if (platformName.Contains("tvos") && OperatingSystem.IsTvOS())
             {
                 return true;
             }
+
             if (platformName.Contains("watchos") && OperatingSystem.IsWatchOS())
             {
                 return true;

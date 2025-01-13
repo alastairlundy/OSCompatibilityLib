@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlastairLundy.Extensions.Runtime", "AlastairLundy.Extensions.Runtime.csproj", "{98F0975E-6F21-4274-ACE9-7F5B2A452797}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlastairLundy.Polyfills.OperatingSystems", "..\AlastairLundy.Polyfills.OperatingSystems\AlastairLundy.Polyfills.OperatingSystems.csproj", "{2D4A0E2D-8926-4C8C-A006-F008ABE9FAC5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlastairLundy.OSCompatibilityLib", "..\AlastairLundy.OSCompatibilityLib\AlastairLundy.OSCompatibilityLib.csproj", "{2D4A0E2D-8926-4C8C-A006-F008ABE9FAC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

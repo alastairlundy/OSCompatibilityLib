@@ -1,18 +1,18 @@
 ﻿/*
         MIT License
-       
+
        Copyright (c) 2024 Alastair Lundy
-       
+
        Permission is hereby granted, free of charge, to any person obtaining a copy
        of this software and associated documentation files (the "Software"), to deal
        in the Software without restriction, including without limitation the rights
        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
        copies of the Software, and to permit persons to whom the Software is
        furnished to do so, subject to the following conditions:
-       
+
        The above copyright notice and this permission notice shall be included in all
        copies or substantial portions of the Software.
-       
+
        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,158 +24,203 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
+
+using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
+
 // ReSharper disable InconsistentNaming
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
-namespace AlastairLundy.Polyfills.OperatingSystems
+namespace AlastairLundy.OSCompatibilityLib
 {
-        
     public sealed class OperatingSystem : ICloneable, ISerializable
     {
-            /// <summary>
-            /// Gets a PlatformID enumeration value that identifies the operating system platform.
-            /// </summary>
-            public PlatformID Platform { get; private set;}
+        /// <summary>
+        /// Gets a PlatformID enumeration value that identifies the operating system platform.
+        /// </summary>
+        public PlatformID Platform { get; private set; }
 
-            /// <summary>
-            /// Gets a Version object that identifies the operating system.
-            /// </summary>
-            public System.Version Version { get; private set; }
+        /// <summary>
+        /// Gets a Version object that identifies the operating system.
+        /// </summary>
+        public System.Version Version { get; private set; }
 
-            /// <summary>
-            /// Gets the concatenated string representation of the platform identifier, version, and service pack that are currently installed on the operating system.
-            /// </summary>
-            public string VersionString { get; private set; }
+        /// <summary>
+        /// Gets the concatenated string representation of the platform identifier, version, and service pack that are currently installed on the operating system.
+        /// </summary>
+        public string VersionString { get; private set; }
 
-            /// <summary>
-            /// Gets the concatenated string representation of the platform identifier, version, and service pack that are currently installed on the operating system.
-            /// </summary>
-            public string ServicePack { get; private set;}
+        /// <summary>
+        /// Gets the concatenated string representation of the platform identifier, version, and service pack that are currently installed on the operating system.
+        /// </summary>
+        public string ServicePack { get; private set; }
 
-            /// <summary>
-            /// Represents information about an operating system, such as the version and platform identifier. This class cannot be inherited.
-            /// </summary>
-            public OperatingSystem()
+        /// <summary>
+        /// Represents information about an operating system, such as the version and platform identifier. This class cannot be inherited.
+        /// </summary>
+        public OperatingSystem()
+        {
+            if (IsWindows())
             {
-                if (IsWindows())
-                {
-                    Version = GetWindowsVersion();
-                }
-                else if (IsMacOS())
-                {
-                    Version = GetMacOSVersion();
-                }
-                else if (IsLinux())
-                {
-                    Version = GetLinuxVersion();
-                }
-                else if (IsFreeBSD())
-                {
-                    Version = GetFreeBSDVersion();
-                }
-                else if (IsMacCatalyst())
-                {
-                    Version = IsMacOS() ? GetMacOSVersion() : GetFallbackOsVersion();
-                }
-                else if (IsAndroid())
-                {
-                    Version = GetAndroidVersion();
-                }
-                else if (IsIOS() || IsWatchOS() || IsTvOS())
-                {
-                    Version = GetFallbackOsVersion();
-                }
-                else
-                {
-                   Version = GetFallbackOsVersion();
-
-                   ServicePack = Environment.OSVersion.ServicePack;
-                   VersionString = Environment.OSVersion.VersionString;
-                }
+                Version = GetWindowsVersion();
+            }
+            else if (IsMacOS())
+            {
+                Version = GetMacOSVersion();
+            }
+            else if (IsLinux())
+            {
+                Version = GetLinuxVersion();
+            }
+            else if (IsFreeBSD())
+            {
+                Version = GetFreeBSDVersion();
+            }
+            else if (IsMacCatalyst())
+            {
+                Version = IsMacOS() ? GetMacOSVersion() : GetFallbackOsVersion();
+            }
+            else if (IsAndroid())
+            {
+                Version = GetAndroidVersion();
+            }
+            else if (IsIOS() || IsWatchOS() || IsTvOS())
+            {
+                Version = GetFallbackOsVersion();
+            }
+            else
+            {
+                Version = GetFallbackOsVersion();
 
                 ServicePack = Environment.OSVersion.ServicePack;
                 VersionString = Environment.OSVersion.VersionString;
             }
 
-            private Version GetLinuxVersion()
+            ServicePack = Environment.OSVersion.ServicePack;
+            VersionString = Environment.OSVersion.VersionString;
+        }
+
+        private Version GetLinuxVersion()
+        {
+            if (OperatingSystem.IsLinux())
             {
-                
+                string versionString = GetOsReleasePropertyValue("VERSION=");
+                versionString = versionString.Replace("LTS", string.Empty);
+
+                return Version.Parse(versionString);
             }
 
-            internal static Version GetFallbackOsVersion()
+            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
+        /// <exception cref="PlatformNotSupportedException"></exception>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]
+#endif
+        internal string GetOsReleasePropertyValue(string propertyName)
+        {
+            if (IsLinux() == false)
             {
-                return Environment.OSVersion.Version;
+                throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
             }
 
-            /// <summary>
-            /// Initializes a new instance of the OperatingSystem class, using the specified platform identifier value and version object.
-            /// </summary>
-            /// <param name="platform">One of the PlatformID values that indicates the operating system platform.</param>
-            /// <param name="version">A Version object that indicates the version of the operating system.</param>
-            ///
-            /// <exception cref="ArgumentException">Platform is not a PlatformID enumeration value.</exception>
-            /// <exception cref="NullReferenceException">Version is null.</exception>
-            public OperatingSystem(PlatformID platform, Version version)
+            string output = string.Empty;
+
+            string[] osReleaseInfo = File.ReadAllLines("/etc/os-release");
+
+            foreach (string s in osReleaseInfo)
             {
-                if (version == null)
+                if (s.ToUpper().StartsWith(propertyName))
                 {
-                    throw new NullReferenceException();
+                    output = s.Replace(propertyName, string.Empty);
                 }
-
-                if (platform != PlatformID.Win32NT
-                    && platform != PlatformID.Win32Windows
-                    && platform != PlatformID.Win32S
-                    && platform != PlatformID.WinCE
-                    && platform != PlatformID.Xbox
-                    && platform != PlatformID.MacOSX
-                    && platform != PlatformID.Unix)
-                {
-                    throw new ArgumentException($"Platform {platform.ToString()} is not a PlatformID enumeration value.");
-                }
-
-                Version = version;
-                Platform = platform;
-
-               // ServicePack =version.
-                VersionString = ToString();
             }
-            
-            /// <summary>
-            /// Populates a SerializationInfo object with the data necessary to deserialize this instance.
-            /// </summary>
-            /// <param name="info">The object to populate with serialization information.</param>
-            /// <param name="context">The place to store and retrieve serialized data. Reserved for future use.</param>
-            /// <exception cref="ArgumentNullException">Thrown if info is null.</exception>
-            /// <remarks>The context parameter is reserved for future use; it is currently not implemented in the GetObjectData method.
-            /// For more information, see the SerializationInfo.AddValue method.
-            /// </remarks>
-            [Obsolete("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]
-            public void GetObjectData(SerializationInfo info, StreamingContext context)
+
+            return output;
+        }
+
+
+        internal static Version GetFallbackOsVersion()
+        {
+            return Environment.OSVersion.Version;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the OperatingSystem class, using the specified platform identifier value and version object.
+        /// </summary>
+        /// <param name="platform">One of the PlatformID values that indicates the operating system platform.</param>
+        /// <param name="version">A Version object that indicates the version of the operating system.</param>
+        ///
+        /// <exception cref="ArgumentException">Platform is not a PlatformID enumeration value.</exception>
+        /// <exception cref="NullReferenceException">Version is null.</exception>
+        public OperatingSystem(PlatformID platform, Version version)
+        {
+            if (version == null)
             {
-                if (info is null)
-                {
-                    throw new ArgumentNullException(nameof(info));
-                }
-
-                info.AddValue("Platform", Platform);
-                info.AddValue("Version", Version);
-                info.AddValue("ServicePack", ServicePack);
-                info.AddValue("VersionString", VersionString);
+                throw new NullReferenceException();
             }
 
-            /// <summary>
-            /// Creates an OperatingSystem object that is identical to this instance.
-            /// </summary>
-            /// <returns>An OperatingSystem object that is a copy of this instance.</returns>
-            public object Clone()
+            if (platform != PlatformID.Win32NT
+                && platform != PlatformID.Win32Windows
+                && platform != PlatformID.Win32S
+                && platform != PlatformID.WinCE
+                && platform != PlatformID.Xbox
+                && platform != PlatformID.MacOSX
+                && platform != PlatformID.Unix)
             {
-                return new OperatingSystem(Platform, Version);
+                throw new ArgumentException($"Platform {platform.ToString()} is not a PlatformID enumeration value.");
             }
-            
+
+            Version = version;
+            Platform = platform;
+
+            // ServicePack =version.
+            VersionString = ToString();
+        }
+
+        /// <summary>
+        /// Populates a SerializationInfo object with the data necessary to deserialize this instance.
+        /// </summary>
+        /// <param name="info">The object to populate with serialization information.</param>
+        /// <param name="context">The place to store and retrieve serialized data. Reserved for future use.</param>
+        /// <exception cref="ArgumentNullException">Thrown if info is null.</exception>
+        /// <remarks>The context parameter is reserved for future use; it is currently not implemented in the GetObjectData method.
+        /// For more information, see the SerializationInfo.AddValue method.
+        /// </remarks>
+        [Obsolete(
+            "This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info is null)
+            {
+                throw new ArgumentNullException(nameof(info));
+            }
+
+            info.AddValue("Platform", Platform);
+            info.AddValue("Version", Version);
+            info.AddValue("ServicePack", ServicePack);
+            info.AddValue("VersionString", VersionString);
+        }
+
+        /// <summary>
+        /// Creates an OperatingSystem object that is identical to this instance.
+        /// </summary>
+        /// <returns>An OperatingSystem object that is a copy of this instance.</returns>
+        public object Clone()
+        {
+            return new OperatingSystem(Platform, Version);
+        }
+
         private static Version GetWindowsVersion()
         {
             return Version.Parse(RuntimeInformation.OSDescription
@@ -186,7 +231,7 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         private static Version GetMacOSVersion()
         {
             string versionString = RunProcess(
-                CreateProcess("/usr/bin/sw_vers", ""))
+                    CreateProcess("/usr/bin/sw_vers", ""))
                 .Replace("ProductVersion:", string.Empty)
                 .Replace(" ", string.Empty);
 
@@ -260,7 +305,8 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         /// <param name="build">The build release number (optional).</param>
         /// <param name="revision">The revision release number (optional).</param>
         /// <returns>true if the current application is running on the specified platform and is at least in the version specified in the parameters; false otherwise.</returns>
-        public static bool IsOSPlatformVersionIsAtLeast(string platform, int major, int minor = 0, int build = 0, int revision = 0)
+        public static bool IsOSPlatformVersionIsAtLeast(string platform, int major, int minor = 0, int build = 0,
+            int revision = 0)
         {
             return IsOSPlatform(platform) && IsOsVersionAtLeast(major, minor, build, revision);
         }
@@ -437,7 +483,7 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         /// <returns>true if the current application is running on an Android version that is at least what was specified in the parameters; false otherwise.</returns>
         public static bool IsAndroidVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
-            return IsAndroid() &&  GetAndroidVersion() >= new Version(major, minor, build, revision);
+            return IsAndroid() && GetAndroidVersion() >= new Version(major, minor, build, revision);
         }
 
         /// <summary>
@@ -484,6 +530,6 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         private static bool IsOsVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
             return Environment.OSVersion.Version >= new Version(major, minor, build, revision);
-        } 
+        }
     }
 }

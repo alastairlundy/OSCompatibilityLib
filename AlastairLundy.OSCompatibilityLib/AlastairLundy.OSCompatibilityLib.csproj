@@ -1,7 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <Authors>AlastairLundy</Authors>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageVersion>2.1.0</PackageVersion>
+        <Description>Add OS detection support for Windows, macOS, Linux, and FreeBSD to .NET Stadard 2 projects and more.</Description>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <AssemblyName>AlastairLundy.OSCompatibilityLib</AssemblyName>
+        <RootNamespace>AlastairLundy.OSCompatibilityLib</RootNamespace>
+        <PackageId>AlastairLundy.OSCompatibilityLib</PackageId>
+        <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
     </PropertyGroup>
 
     <ItemGroup>

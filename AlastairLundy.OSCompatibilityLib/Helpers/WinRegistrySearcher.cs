@@ -25,7 +25,7 @@
 using System;
 using System.IO;
 
-namespace AlastairLundy.Polyfills.OperatingSystems.Helpers
+namespace AlastairLundy.OSCompatibilityLib.Helpers
 {
     /// <summary>
     /// A class to make searching the Windows Registry easier.
