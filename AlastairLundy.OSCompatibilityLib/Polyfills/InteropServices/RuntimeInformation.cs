@@ -32,13 +32,14 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using AlastairLundy.OSCompatibilityLib.Helpers;
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
+using AlastairLundy.OSCompatibilityLib.Specializations.Windows;
 
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable ConvertIfStatementToReturnStatement
 // ReSharper disable ConvertIfStatementToConditionalTernaryExpression
 // ReSharper disable RedundantBoolCompare
 
-namespace AlastairLundy.OSCompatibilityLib.InteropServices
+namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 {
     public static class RuntimeInformation
     {

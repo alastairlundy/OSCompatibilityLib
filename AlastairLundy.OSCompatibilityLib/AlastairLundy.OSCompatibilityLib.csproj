@@ -12,13 +12,17 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <PackageIcon>platformkit_logo_512x.jpg</PackageIcon>
-        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>netstandard2.0;netstandard2.1;net8.0;net9.0</TargetFrameworks>
         <AssemblyName>AlastairLundy.OSCompatibilityLib</AssemblyName>
         <RootNamespace>AlastairLundy.OSCompatibilityLib</RootNamespace>
         <PackageId>AlastairLundy.OSCompatibilityLib</PackageId>
         <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+    </ItemGroup>
+    
     <ItemGroup>
         <Content Include="..\LICENSE.txt">
             <PackagePath>LICENSE.txt</PackagePath>

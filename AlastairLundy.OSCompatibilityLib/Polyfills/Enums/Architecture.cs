@@ -22,8 +22,11 @@
        SOFTWARE.
    */
 
-namespace AlastairLundy.OSCompatibilityLib
+namespace AlastairLundy.OSCompatibilityLib.Polyfills
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum Architecture
     {
         X86 = 0,

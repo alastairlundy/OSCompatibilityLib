@@ -28,6 +28,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
+
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
 // ReSharper disable InconsistentNaming
@@ -35,7 +39,7 @@ using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Local
 
-namespace AlastairLundy.OSCompatibilityLib
+namespace AlastairLundy.OSCompatibilityLib.Polyfills
 {
     public sealed class OperatingSystem : ICloneable, ISerializable
     {

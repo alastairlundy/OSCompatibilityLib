@@ -25,9 +25,14 @@
 using System;
 using System.IO;
 using System.Reflection;
+
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
+
 using AlastairLundy.OSCompatibilityLib.Helpers;
 
-namespace AlastairLundy.OSCompatibilityLib.InteropServices
+namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 {
     /// <summary>
     /// 
@@ -39,6 +44,7 @@ namespace AlastairLundy.OSCompatibilityLib.InteropServices
         /// </summary>
         /// <param name="a"></param>
         /// <returns></returns>
+        [Obsolete("Obsolete")]
         public static bool FromGlobalAccessCache(Assembly a)
         {
             try
