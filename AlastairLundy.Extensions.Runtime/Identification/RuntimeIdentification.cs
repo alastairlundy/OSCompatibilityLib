@@ -65,20 +65,6 @@ namespace AlastairLundy.Extensions.Runtime.Identification
         /// <exception cref="PlatformNotSupportedException"></exception>
         private static string GetArchitectureString()
         {
-#if NET5_0_OR_GREATER
-            return RuntimeInformation.OSArchitecture switch
-            {
-                Architecture.X64 => "x64",
-                Architecture.X86 => "x86",
-                Architecture.Arm => "arm",
-                Architecture.Arm64 => "arm64",
-        #if NET6_0_OR_GREATER
-                Architecture.S390x => "s390x",
-                Architecture.Wasm => throw new PlatformNotSupportedException(),
-        #endif
-                _ => null
-            } ?? throw new InvalidOperationException();
-#else
             switch (RuntimeInformation.OSArchitecture)
             {
                 case Architecture.Arm:
@@ -92,7 +78,6 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 default:
                     throw new PlatformNotSupportedException();
             }
-#endif
         }
 
         /// <summary>
