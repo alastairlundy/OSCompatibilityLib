@@ -1,4 +1,4 @@
-﻿/*
+/*
         MIT License
        
        Copyright (c) 2020-2024 Alastair Lundy
@@ -22,13 +22,21 @@
        SOFTWARE.
    */
 
-namespace AlastairLundy.Extensions.Runtime.Identification
+
+using System;
+
+using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
+// ReSharper disable ConvertToPrimaryConstructor
+
+namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification.Exceptions
 {
-    public enum TargetFrameworkType
+    public class RuntimeIdentifierGenerationException : Exception
     {
-        DotNet,
-        DotNetCore,
-        DotNetFramework,
-        Mono
+
+        public RuntimeIdentifierGenerationException() : base(Resources.Exceptions_RuntimeIdentifierGeneration)
+        {
+            
+        }
+        
     }
 }

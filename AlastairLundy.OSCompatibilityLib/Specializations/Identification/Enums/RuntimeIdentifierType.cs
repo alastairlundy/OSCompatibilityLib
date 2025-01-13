@@ -22,20 +22,32 @@
        SOFTWARE.
    */
 
-
-using System;
-
-using AlastairLundy.Extensions.Runtime.Internal.Localizations;
-
-namespace AlastairLundy.Extensions.Runtime.Identification.Exceptions
+namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification
 {
-    public class RuntimeIdentifierGenerationException : Exception
+    /// <summary>
+    /// The type of RuntimeIdentifier generated or detected.
+    /// </summary>
+    public enum RuntimeIdentifierType
     {
-
-        public RuntimeIdentifierGenerationException() : base(Resources.Exceptions_RuntimeIdentifierGeneration)
-        {
-            
-        }
-        
+        /// <summary>
+        /// A Runtime Identifier that is valid for all architectures of an operating system.
+        /// </summary>
+        AnyGeneric,
+        /// <summary>
+        /// A Runtime Identifier that is valid for all supported versions of the OS being run.
+        /// </summary>
+        Generic,
+        /// <summary>
+        /// A Runtime Identifier that is valid for the specified OS and specified OS version being run.
+        /// </summary>
+        Specific,
+        /// <summary>
+        /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
+        /// </summary>
+        DistroSpecific,
+        /// <summary>
+        /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
+        /// </summary>
+        VersionLessDistroSpecific
     }
 }

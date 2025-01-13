@@ -28,29 +28,34 @@
 // ReSharper disable once RedundantUsingDirective
 #endif
 
-using System;
-using System.Collections.Generic;
 
+using AlastairLundy.OSCompatibilityLib.Specializations.Identification.Exceptions;
 #if NET5_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
 
 using System.Runtime.Versioning;
 #endif
 
+// ReSharper disable InconsistentNaming
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 
-using AlastairLundy.Extensions.Runtime.Identification.Exceptions;
-using AlastairLundy.Extensions.Runtime.Internal.Localizations;
+using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
+
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using RuntimeInformation = AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices.RuntimeInformation;
+using Architecture = AlastairLundy.OSCompatibilityLib.Polyfills.Architecture;
+#else
+using OperatingSystem = System.OperatingSystem;
+using RuntimeInformation = System.Runtime.InteropServices.RuntimeInformation;
+using Architecture = System.Runtime.InteropServices.Architecture;
 #endif
 
-// ReSharper disable InconsistentNaming
-
-namespace AlastairLundy.Extensions.Runtime.Identification
+namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification
 {
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.
@@ -163,10 +168,6 @@ namespace AlastairLundy.Extensions.Runtime.Identification
                 {
                     osName = "ios";
                 }
-                if (OperatingSystemExtensions.IsTizen())
-                {
-                    osName = "tizen";
-                }
                 if (OperatingSystem.IsTvOS())
                 {
                     osName = "tvos";
@@ -218,8 +219,10 @@ namespace AlastairLundy.Extensions.Runtime.Identification
 #endif
             if (OperatingSystem.IsWindows())
             {
+                OperatingSystem operatingSystem = new OperatingSystem(PlatformID.Win32NT, Environment.OSVersion.Version);
+                
                 bool isWindows10 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 10240) &&
-                                   OperatingSystemExtensions.Version < new Version(10, 0, 20349);
+                                  operatingSystem.Version  < new Version(10, 0, 20349);
                 
                 bool isWindows11 = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000);
                 
@@ -239,13 +242,13 @@ namespace AlastairLundy.Extensions.Runtime.Identification
             }
             if (OperatingSystem.IsLinux())
             {
-                osVersion = OperatingSystemExtensions.Version.ToString();
+                osVersion = Environment.OSVersion.Version.ToString();
             }
             if (OperatingSystem.IsFreeBSD())
             {
-                osVersion = OperatingSystemExtensions.Version.ToString();
+                osVersion = Environment.OSVersion.Version.ToString();
                 
-                switch (osVersion.Where(x => x == '.').Count())
+                switch (osVersion.Count(x => x == '.'))
                 {
                     case 3:
                         osVersion = osVersion.Remove(osVersion.Length - 4, 4);
@@ -264,12 +267,12 @@ namespace AlastairLundy.Extensions.Runtime.Identification
             {
                 bool isAtLeastHighSierra = OperatingSystem.IsMacOSVersionAtLeast(10, 13);
 
-                Version version = OperatingSystemExtensions.Version;
+                Version version = Environment.OSVersion.Version;
 
                 if (isAtLeastHighSierra)
                 {
                     
-                    if (OperatingSystem.IsMacOSVersionAtLeast(11))
+                    if (OperatingSystem.IsMacOSVersionAtLeast(11, 0))
                     {
                         osVersion = $"{version.Major}";
                     }

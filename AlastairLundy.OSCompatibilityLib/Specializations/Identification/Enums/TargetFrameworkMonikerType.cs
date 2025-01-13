@@ -22,8 +22,11 @@
        SOFTWARE.
    */
 
-namespace AlastairLundy.Extensions.Runtime.Identification
+namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum TargetFrameworkMonikerType
     {
         Generic,

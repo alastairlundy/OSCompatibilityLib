@@ -1,4 +1,4 @@
-/*
+﻿/*
         MIT License
        
        Copyright (c) 2020-2024 Alastair Lundy
@@ -22,32 +22,13 @@
        SOFTWARE.
    */
 
-namespace AlastairLundy.Extensions.Runtime.Identification
+namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification
 {
-    /// <summary>
-    /// The type of RuntimeIdentifier generated or detected.
-    /// </summary>
-    public enum RuntimeIdentifierType
+    public enum TargetFrameworkType
     {
-        /// <summary>
-        /// A Runtime Identifier that is valid for all architectures of an operating system.
-        /// </summary>
-        AnyGeneric,
-        /// <summary>
-        /// A Runtime Identifier that is valid for all supported versions of the OS being run.
-        /// </summary>
-        Generic,
-        /// <summary>
-        /// A Runtime Identifier that is valid for the specified OS and specified OS version being run.
-        /// </summary>
-        Specific,
-        /// <summary>
-        /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
-        /// </summary>
-        DistroSpecific,
-        /// <summary>
-        /// This is meant for Linux use only. DO NOT USE ON WINDOWS or MAC.
-        /// </summary>
-        VersionLessDistroSpecific
+        DotNet,
+        DotNetCore,
+        DotNetFramework,
+        Mono
     }
 }

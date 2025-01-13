@@ -30,10 +30,11 @@ using System.Text;
 // ReSharper disable MemberCanBePrivate.Global
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-using OperatingSystem = AlastairLundy.Extensions.Runtime.OperatingSystemExtensions;
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+using RuntimeInformation = AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices.RuntimeInformation;
 #endif
 
-namespace AlastairLundy.Extensions.Runtime.Identification {
+namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification {
         
 /// <summary>
 /// A class to manage Target Framework detection
@@ -66,9 +67,7 @@ public static class TargetFrameworkIdentification
     // ReSharper disable once InconsistentNaming
     private static string GetOsSpecificNetTFM(TargetFrameworkMonikerType targetFrameworkMonikerType)
     {
-#if NET6_0_OR_GREATER
         Version frameworkVersion = GetFrameworkVersion();
-#endif
         
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.Append(GetNetTFM());
@@ -84,13 +83,11 @@ public static class TargetFrameworkIdentification
                 stringBuilder.Append(RuntimeIdentification.GetOsVersionString());
             }
         }
-#if NET5_0_OR_GREATER
         else if (OperatingSystem.IsMacCatalyst())
         {
             stringBuilder.Append('-');
             stringBuilder.Append("maccatalyst");
         }
-#endif
         else if (OperatingSystem.IsWindows())
         {
             stringBuilder.Append('-');
@@ -109,7 +106,7 @@ public static class TargetFrameworkIdentification
                 }
                 else if (isAtLeastWin10V1607)
                 {
-                    stringBuilder.Append(OperatingSystemExtensions.Version);
+                    stringBuilder.Append(Environment.OSVersion.Version);
                 }
                 else
                 {
@@ -137,12 +134,6 @@ public static class TargetFrameworkIdentification
             stringBuilder.Append('-');
             stringBuilder.Append("watchos");
         }
-        else if (OperatingSystemExtensions.IsTizen())
-        {
-            stringBuilder.Append('-');
-            stringBuilder.Append("tizen");
-        }
-#if NET8_0_OR_GREATER
         if (frameworkVersion.Major >= 8)
         {
             if (OperatingSystem.IsBrowser())
@@ -151,7 +142,6 @@ public static class TargetFrameworkIdentification
                  stringBuilder.Append("browser");
             }
         }
-#endif
         return stringBuilder.ToString();
     }
 
