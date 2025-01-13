@@ -25,7 +25,9 @@
 using System;
 using System.Runtime.InteropServices;
 using AlastairLundy.Polyfills.OperatingSystems.Internal.Localizations;
+
 using RuntimeInformation = AlastairLundy.Polyfills.OperatingSystems.InteropServices.RuntimeInformation;
+
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
 #endif
@@ -46,16 +48,6 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         public static bool IsWindows()
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-        }
-
-        /// <summary>
-        /// Returns whether the operating system that is running is Windows.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is Windows based; returns false otherwise.</returns>
-        public static bool IsWindows(this System.OperatingSystem operatingSystem)
-        {
-            return IsWindows();
         }
         
         /// <summary>
@@ -111,33 +103,12 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         }
 
         /// <summary>
-        /// Returns whether the operating system that is running is macOS.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is macOS based; returns false otherwise.</returns>
-        // ReSharper disable once InconsistentNaming
-        public static bool IsMacOS(this System.OperatingSystem operatingSystem)
-        {
-            return IsMacOS();
-        }
-
-        /// <summary>
         /// Returns whether the operating system that is running is Linux.
         /// </summary>
         /// <returns>true if the Operating System being run is Linux based; returns false otherwise.</returns>
         public static bool IsLinux()
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Linux);
-        }
-
-        /// <summary>
-        /// Returns whether the operating system that is running is based on Linux.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is Linux based; returns false otherwise.</returns>
-        public static bool IsLinux(this System.OperatingSystem operatingSystem)
-        {
-            return IsLinux();
         }
 
         /// <summary>
@@ -151,33 +122,12 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         }
 
         /// <summary>
-        /// Returns whether the operating system that is running is based on FreeBSD.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is FreeBSD based; returns false otherwise.</returns>
-        // ReSharper disable once InconsistentNaming
-        public static bool IsFreeBSD(this System.OperatingSystem operatingSystem)
-        {
-            return IsFreeBSD();
-        }
-
-        /// <summary>
         /// Returns whether the operating system that is running is based on Tizen.
         /// </summary>
         /// <returns>true if the Operating System being run is Tizen based; returns false otherwise.</returns>
         public static bool IsTizen()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("tizen");
-        }
-
-        /// <summary>
-        /// Returns whether the operating system that is running is based on Tizen.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is Tizen based; returns false otherwise.</returns>
-        public static bool IsTizen(this System.OperatingSystem operatingSystem)
-        {
-            return IsTizen();
         }
         
         /// <summary>
@@ -190,53 +140,12 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         }
 
         /// <summary>
-        /// Returns whether the operating system that is running is based on IOS.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is IOS based; returns false otherwise.</returns>
-        public static bool IsIOS(this System.OperatingSystem operatingSystem)
-        {
-            return IsIOS();
-        }
-
-        /// <summary>
         /// Returns whether the operating system that is running is based on Android.
         /// </summary>
         /// <returns>true if the Operating System being run is Android based; returns false otherwise.</returns>
         public static bool IsAndroid()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("android") && RuntimeInformation.OSDescription.ToLower().Contains("tv") == false;
-        }
-
-        /// <summary>
-        /// Returns whether the operating system that is running is based on Android.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is Android based; returns false otherwise.</returns>
-        public static bool IsAndroid(this System.OperatingSystem operatingSystem)
-        {
-            return IsAndroid();
-        }
-
-        /// <summary>
-        /// Returns whether the operating system that is running is based on Android TV.
-        /// </summary>
-        /// <returns>true if the Operating System being run is based on Android TV; returns false otherwise.</returns>
-
-        public static bool IsAndroidTV()
-        {
-            // ReSharper disable once RedundantBoolCompare
-            return RuntimeInformation.OSDescription.ToLower().Contains("android") && RuntimeInformation.OSDescription.ToLower().Contains("tv") == true;
-        }
-
-        /// <summary>
-        /// Returns whether the operating system that is running is based on Android TV.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is based on Android TV; returns false otherwise.</returns>
-        public static bool IsAndroidTV(this System.OperatingSystem operatingSystem)
-        {
-            return IsAndroidTV();
         }
         
         /// <summary>
@@ -246,16 +155,6 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         public static bool IsWatchOS()
         {
             return RuntimeInformation.OSDescription.ToLower().Contains("watchos");
-        }
-
-        /// <summary>
-        /// Returns whether the operating system that is running is based on watchOS.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is based on Watch OS; returns false otherwise.</returns>
-        public static bool IsWatchOS(this System.OperatingSystem operatingSystem)
-        {
-            return IsWatchOS();
         }
 
         /// <summary>
@@ -273,17 +172,7 @@ namespace AlastairLundy.Polyfills.OperatingSystems
                 return false;
             }
         }
-        
-        /// <summary>
-        /// Returns whether the operating system that is running is based on tvOS.
-        /// </summary>
-        /// <param name="operatingSystem"></param>
-        /// <returns>true if the Operating System being run is based on tvOS; returns false otherwise.</returns>
-        public static bool IsTvOS(this System.OperatingSystem operatingSystem)
-        {
-            return IsTvOS();
-        }
-        
+
         /// <summary>
         /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
         /// </summary>
@@ -296,22 +185,6 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         {
             return IsWindowsVersionAtLeast(new Version(major, minor, build, revision));
         }
-        
-        /// <summary>
-        /// Checks to see whether the specified version of Windows is the same or newer than the installed version of Windows.
-        /// </summary>
-        /// <param name="versionToCompare">The version to be compared.</param>
-        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if the operating system being run is not based on Windows.</exception>
-        public static bool IsWindowsVersionAtLeast(Version versionToCompare)
-        {
-            if (IsWindows())
-            {
-                return versionToCompare >= PlatformID.Win32NT.GetSystem().Version;
-            }
-
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_WindowsOnly);
-        }
 
         /// <summary>
         /// Checks to see whether the specified version of macOS is the same or newer than the installed version of macOS.
@@ -319,12 +192,11 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         /// <param name="major">The major version of the version to be compared.</param>
         /// <param name="minor">The minor version of the version to be compared.</param>
         /// <param name="build">The build version of the version to be compared.</param>
-        /// <param name="revision">The revision version of the version to be compared</param>
         /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
         // ReSharper disable once InconsistentNaming
-        public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
+        public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0)
         {
-            return IsMacOSVersionAtLeast(new Version(major, minor, build, revision));
+            return IsMacOSVersionAtLeast(new Version(major, minor, build));
         }
         
         /// <summary>
@@ -355,22 +227,6 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         {
             return IsLinuxVersionAtLeast(new Version(major, minor, build, revision));
         }
-        
-        /// <summary>
-        /// Checks to see whether the specified version of Linux is the same or newer than the installed version of Linux.
-        /// </summary>
-        /// <param name="versionToCompare"></param>
-        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if the operating system being run is not based on Linux.</exception>
-        public static bool IsLinuxVersionAtLeast(Version versionToCompare)
-        {
-            if (IsLinux())
-            {
-                return versionToCompare >= PlatformID.Unix.GetSystem().Version;
-            }
-
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
-        }
 
         /// <summary>
         /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of FreeBSD.
@@ -384,23 +240,6 @@ namespace AlastairLundy.Polyfills.OperatingSystems
         public static bool IsFreeBSDVersionAtLeast(int major, int minor = 0, int build = 0, int revision = 0)
         {
             return IsFreeBSDVersionAtLeast(new Version(major, minor, build, revision));
-        }
-
-        /// <summary>
-        /// Checks to see whether the specified version of FreeBSD is the same or newer than the installed version of FreeBSD.
-        /// </summary>
-        /// <param name="versionToCompare">The version to be compared</param>
-        /// <returns>true if the specified version is greater than or equal to the installed version; returns false otherwise.</returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if the operating system being run is not based on FreeBSD.</exception>
-        // ReSharper disable once InconsistentNaming
-        public static bool IsFreeBSDVersionAtLeast(Version versionToCompare)
-        {
-            if (IsFreeBSD())
-            {
-                return versionToCompare >= PlatformID.Unix.GetSystem().Version;
-            }
-
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_FreeBsdOnly);
         }
 
         internal static Version GetOsVersion()
