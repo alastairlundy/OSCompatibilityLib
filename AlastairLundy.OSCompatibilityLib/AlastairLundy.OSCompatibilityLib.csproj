@@ -17,6 +17,8 @@
         <RootNamespace>AlastairLundy.OSCompatibilityLib</RootNamespace>
         <PackageId>AlastairLundy.OSCompatibilityLib</PackageId>
         <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
+        <RepositoryUrl>https://github.com/alastairlundy/OSCompatibilityLib/</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
 
     <ItemGroup>
