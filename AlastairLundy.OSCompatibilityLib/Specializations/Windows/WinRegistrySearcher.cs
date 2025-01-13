@@ -23,14 +23,25 @@
    */
 
 using System;
+using System.Diagnostics;
 using System.IO;
+using AlastairLundy.OSCompatibilityLib.Helpers;
 
-namespace AlastairLundy.OSCompatibilityLib.Helpers
+#if NETSTANDARD2_0 || NETSTANDARD2_1
+using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
+// ReSharper disable ClassNeverInstantiated.Global
+#endif
+
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
+
+namespace AlastairLundy.OSCompatibilityLib.Specializations.Windows
 {
     /// <summary>
     /// A class to make searching the Windows Registry easier.
     /// </summary>
-    internal class WinRegistrySearcher
+    public class WinRegistrySearcher
     {
         /// <summary>
         ///  Gets the value of a registry key in the Windows registry.
@@ -41,10 +52,10 @@ namespace AlastairLundy.OSCompatibilityLib.Helpers
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-        internal static string GetValue(string query){
+        public static string GetValue(string query){
             if (OperatingSystem.IsWindows())
             {
-                var process = ProcessRunner.CreateProcess(
+                Process process = ProcessRunner.CreateProcess(
                     $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe",
                         $"REG QUERY {query}");
             
@@ -71,10 +82,10 @@ namespace AlastairLundy.OSCompatibilityLib.Helpers
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-        internal static string GetValue(string query, string value){
+        public static string GetValue(string query, string value){
             if (OperatingSystem.IsWindows())
             {
-                var process = ProcessRunner.CreateProcess(
+                Process process = ProcessRunner.CreateProcess(
                     $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe",
                     $"REG QUERY {query}");
             
