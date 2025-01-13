@@ -24,7 +24,7 @@
 
 using System;
 
-namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification
+namespace AlastairLundy.OSCompatibilityLib.Specializations.Extensions
 {
     public static class GetSystemExtension
     {

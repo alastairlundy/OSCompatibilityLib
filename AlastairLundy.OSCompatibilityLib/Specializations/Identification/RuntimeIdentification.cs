@@ -29,7 +29,6 @@
 #endif
 
 
-using AlastairLundy.OSCompatibilityLib.Specializations.Identification.Exceptions;
 #if NET5_0_OR_GREATER
 using System.Diagnostics.CodeAnalysis;
 
@@ -37,13 +36,12 @@ using System.Runtime.Versioning;
 #endif
 
 // ReSharper disable InconsistentNaming
+using System.IO;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
-
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
@@ -55,7 +53,7 @@ using RuntimeInformation = System.Runtime.InteropServices.RuntimeInformation;
 using Architecture = System.Runtime.InteropServices.Architecture;
 #endif
 
-namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification
+namespace AlastairLundy.OSCompatibilityLib.Specializations
 {
     /// <summary>
     /// A class to manage RuntimeId detection and programmatic generation.

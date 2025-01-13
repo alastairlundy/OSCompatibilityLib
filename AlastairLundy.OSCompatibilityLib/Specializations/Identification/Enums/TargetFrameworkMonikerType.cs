@@ -22,7 +22,7 @@
        SOFTWARE.
    */
 
-namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification
+namespace AlastairLundy.OSCompatibilityLib.Specializations
 {
     /// <summary>
     /// 

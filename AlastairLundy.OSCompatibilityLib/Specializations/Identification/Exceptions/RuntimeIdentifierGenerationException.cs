@@ -28,7 +28,7 @@ using System;
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 // ReSharper disable ConvertToPrimaryConstructor
 
-namespace AlastairLundy.OSCompatibilityLib.Specializations.Identification.Exceptions
+namespace AlastairLundy.OSCompatibilityLib.Specializations
 {
     public class RuntimeIdentifierGenerationException : Exception
     {

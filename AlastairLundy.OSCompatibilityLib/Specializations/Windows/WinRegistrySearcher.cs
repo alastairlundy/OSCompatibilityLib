@@ -25,6 +25,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+
 using AlastairLundy.OSCompatibilityLib.Helpers;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
