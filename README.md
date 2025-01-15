@@ -56,3 +56,5 @@ The following tables indicate Operating Systems that are capable of being detect
 OSCompatibilityLib is licensed under the MIT license.
 
 ## Acknowledgements
+This project makes use of the follwing 3rd party code or other works:
+* [.NET API Docs](https://github.com/dotnet/dotnet-api-docs/) for Polyfill class, property, and method xml doc comments
