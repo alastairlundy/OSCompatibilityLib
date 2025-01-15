@@ -54,3 +54,5 @@ The following tables indicate Operating Systems that are capable of being detect
 ## License
 
 OSCompatibilityLib is licensed under the MIT license.
+
+## Acknowledgements
