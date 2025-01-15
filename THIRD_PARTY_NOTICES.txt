@@ -1,0 +1,3 @@
+OSCompatibilityLib makes use of some code from other open source projects/
+
+OSCompatibilityLib uses Microsoft's .NET 
