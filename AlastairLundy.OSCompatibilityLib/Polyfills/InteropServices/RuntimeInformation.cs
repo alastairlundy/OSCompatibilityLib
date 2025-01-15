@@ -29,9 +29,14 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
+
+using Architecture = System.Runtime.InteropServices.Architecture;
+using OSPlatform = System.Runtime.InteropServices.OSPlatform;
+
 using AlastairLundy.OSCompatibilityLib.Helpers;
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
+
+using AlastairLundy.OSCompatibilityLib.Specializations;
 using AlastairLundy.OSCompatibilityLib.Specializations.Windows;
 
 // ReSharper disable SuggestVarOrType_BuiltInTypes
@@ -41,6 +46,10 @@ using AlastairLundy.OSCompatibilityLib.Specializations.Windows;
 
 namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public static class RuntimeInformation
     {
         /// <summary>
@@ -56,7 +65,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
         /// <summary>
         /// 
         /// </summary>
-        public static Architecture OSArchitecture { get; private set; }
+        public static System.Runtime.InteropServices.Architecture OSArchitecture { get; private set; }
 
         /// <summary>
         /// 
@@ -266,63 +275,10 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
         {
             if (OperatingSystem.IsWindows())
             {
-                return $"{GetOsNameString()}{GetOsVersionString()}-{GetArchitectureString()}";
+                return $"{RuntimeIdentification.GetOsNameString(RuntimeIdentifierType.Generic)}{GetOsVersionString()}-{GetArchitectureString()}";
             }
 
-            return $"{GetOsNameString()}-{GetArchitectureString()}";
-        }
-
-        private static string GetOsNameString()
-        {
-            string osName = string.Empty;
-
-            if (OperatingSystem.IsWindows())
-            {
-                osName = "win";
-            }
-
-            if (OperatingSystem.IsMacOS())
-            {
-                osName = "osx";
-            }
-
-            if (OperatingSystem.IsFreeBSD())
-            {
-                osName = "freebsd";
-            }
-
-            if (OperatingSystem.IsAndroid())
-            {
-                osName = "android";
-            }
-
-            if (OperatingSystem.IsIOS())
-            {
-                osName = "ios";
-            }
-
-            if (OperatingSystem.IsTvOS())
-            {
-                osName = "tvos";
-            }
-
-            if (OperatingSystem.IsWatchOS())
-            {
-                osName = "watchos";
-            }
-
-            if (OperatingSystem.IsLinux())
-            {
-                osName = "linux";
-            }
-            // TODO Add Browser check here
-
-            if (osName == null || string.IsNullOrEmpty(osName))
-            {
-                throw new PlatformNotSupportedException();
-            }
-
-            return osName;
+            return $"{RuntimeIdentification.GetOsNameString(RuntimeIdentifierType.Generic)}-{GetArchitectureString()}";
         }
 
         /// <summary>

@@ -40,16 +40,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using Architecture = System.Runtime.InteropServices.Architecture;
+
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 using RuntimeInformation = AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices.RuntimeInformation;
-using Architecture = AlastairLundy.OSCompatibilityLib.Polyfills.Architecture;
+//
 #else
 using OperatingSystem = System.OperatingSystem;
 using RuntimeInformation = System.Runtime.InteropServices.RuntimeInformation;
-using Architecture = System.Runtime.InteropServices.Architecture;
 #endif
 
 namespace AlastairLundy.OSCompatibilityLib.Specializations
@@ -131,7 +132,7 @@ namespace AlastairLundy.OSCompatibilityLib.Specializations
         [SupportedOSPlatform("android")]
         [SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
 #endif
-        private static string GetOsNameString(RuntimeIdentifierType identifierType)
+        internal static string GetOsNameString(RuntimeIdentifierType identifierType)
         {
 #if NET5_0_OR_GREATER
             string? osName = null;
