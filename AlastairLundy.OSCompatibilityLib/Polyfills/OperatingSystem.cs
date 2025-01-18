@@ -28,6 +28,8 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
+using AlastairLundy.OSCompatibilityLib.Helpers;
+
 #if NET5_0_OR_GREATER
 using System.Runtime.Versioning;
 #endif
@@ -234,8 +236,8 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
 
         private static Version GetMacOSVersion()
         {
-            string versionString = RunProcess(
-                    CreateProcess("/usr/bin/sw_vers", ""))
+            string versionString = ProcessRunner.RunProcess(
+                    ProcessRunner.CreateProcess("/usr/bin/sw_vers", ""))
                 .Replace("ProductVersion:", string.Empty)
                 .Replace(" ", string.Empty);
 
@@ -253,41 +255,11 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
 
         private static Version GetAndroidVersion()
         {
-            string result = RunProcess(
-                    CreateProcess("getprop", "ro.build.version.release"))
+            string result = ProcessRunner.RunProcess(
+                    ProcessRunner.CreateProcess("getprop", "ro.build.version.release"))
                 .Replace(" ", string.Empty);
 
             return Version.Parse(result);
-        }
-
-        private static Process CreateProcess(string targetFileName, string arguments)
-        {
-            ProcessStartInfo processStartInfo = new ProcessStartInfo
-            {
-                FileName = targetFileName,
-                Arguments = arguments,
-                RedirectStandardInput = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-
-            Process output = new Process
-            {
-                StartInfo = processStartInfo
-            };
-
-            return output;
-        }
-
-        private static string RunProcess(Process process)
-        {
-            process.Start();
-
-            process.WaitForExit();
-
-            return process.StandardOutput.ReadToEnd();
         }
 
         /// <summary>
@@ -465,7 +437,8 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
         {
             try
             {
-                string result = RunProcess(CreateProcess("uname", "-o"))
+                string result = ProcessRunner.RunProcess(
+                        ProcessRunner.CreateProcess("uname", "-o"))
                     .Replace(" ", string.Empty);
 
                 return result.ToLower().Equals("android");
