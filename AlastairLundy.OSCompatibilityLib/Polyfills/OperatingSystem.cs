@@ -42,6 +42,9 @@ using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
 namespace AlastairLundy.OSCompatibilityLib.Polyfills
 {
+    /// <summary>
+    /// Represents information about an operating system, such as the version and platform identifier. This class cannot be inherited.
+    /// </summary>
     public sealed class OperatingSystem : ICloneable, ISerializable
     {
         /// <summary>

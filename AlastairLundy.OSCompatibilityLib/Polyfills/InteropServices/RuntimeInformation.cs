@@ -49,36 +49,39 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 {
 
     /// <summary>
-    /// 
+    /// Provides information about the .NET runtime installation.
     /// </summary>
     public static class RuntimeInformation
     {
         /// <summary>
-        /// 
+        /// Gets the name of the .NET installation on which an app is running.
         /// </summary>
         public static string FrameworkDescription { get; private set; }
 
         /// <summary>
-        /// 
+        /// Gets a string that describes the operating system on which the app is running.
         /// </summary>
         public static string OSDescription { get; private set; }
 
         /// <summary>
-        /// 
+        /// Gets the platform architecture on which the current app is running.
         /// </summary>
         public static Architecture OSArchitecture { get; private set; }
 
         /// <summary>
-        /// 
+        /// Gets the process architecture of the currently running app.
         /// </summary>
         public static Architecture ProcessArchitecture { get; private set; }
 
         /// <summary>
-        /// 
+        /// Gets the platform for which the runtime was built (or on which an app is running).
         /// </summary>
         public static string RuntimeIdentifier { get; private set; }
 
 
+        /// <summary>
+        ///  Provides information about the .NET runtime installation.
+        /// </summary>
         static RuntimeInformation()
         {
             GetArchitectureInfo();
@@ -393,10 +396,10 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
         #endregion
 
         /// <summary>
-        /// 
+        /// Indicates whether the current application is running on the specified platform.
         /// </summary>
         /// <param name="platform"></param>
-        /// <returns></returns>
+        /// <returns>true if the current app is running on the specified platform; otherwise, false.</returns>
         public static bool IsOSPlatform(OSPlatform platform)
         {
             if (OperatingSystem.IsWindows() && platform == OSPlatform.Windows ||
