@@ -23,7 +23,6 @@
    */
 
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
@@ -53,6 +52,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
         /// <summary>
         /// Gets a Version object that identifies the operating system.
         /// </summary>
+        // ReSharper disable once RedundantNameQualifier
         public System.Version Version { get; private set; }
 
         /// <summary>
@@ -68,6 +68,16 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
         /// <summary>
         /// Represents information about an operating system, such as the version and platform identifier. This class cannot be inherited.
         /// </summary>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("maccatalyst")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [SupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("watchos")]
+#endif
         public OperatingSystem()
         {
             if (IsWindows())
@@ -80,7 +90,9 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
             }
             else if (IsLinux())
             {
+#pragma warning disable CA1416
                 Version = GetLinuxVersion();
+#pragma warning restore CA1416
             }
             else if (IsFreeBSD())
             {
@@ -110,9 +122,12 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
             VersionString = Environment.OSVersion.VersionString;
         }
 
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("linux")]        
+#endif
         private Version GetLinuxVersion()
         {
-            if (OperatingSystem.IsLinux())
+            if (IsLinux())
             {
                 string versionString = GetOsReleasePropertyValue("VERSION=");
                 versionString = versionString.Replace("LTS", string.Empty);

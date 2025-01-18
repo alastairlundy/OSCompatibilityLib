@@ -38,6 +38,7 @@ using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
 using AlastairLundy.OSCompatibilityLib.Specializations;
 using AlastairLundy.OSCompatibilityLib.Specializations.Windows;
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 // ReSharper disable SuggestVarOrType_BuiltInTypes
 // ReSharper disable ConvertIfStatementToReturnStatement
@@ -65,7 +66,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
         /// <summary>
         /// 
         /// </summary>
-        public static System.Runtime.InteropServices.Architecture OSArchitecture { get; private set; }
+        public static Architecture OSArchitecture { get; private set; }
 
         /// <summary>
         /// 
@@ -110,7 +111,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 
             Process unixProcess = ProcessRunner.CreateProcess($"dotnet", "--version");
 
-            string release = "";
+            string release;
 
             if (OperatingSystem.IsWindows())
             {
@@ -146,7 +147,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
             }
             else
             {
-                return $".NET CLR {Environment.Version.ToString()}";
+                return $".NET CLR {Environment.Version}";
             }
 
             return release;
@@ -154,13 +155,11 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 
         private static string GetNetFrameworkDescription()
         {
-            int releaseKey;
+            const string subKey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
 
-            const string subkey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
+            string releaseKeyString = WinRegistrySearcher.GetValue(subKey, "Release");
 
-            string releaseKeyString = WinRegistrySearcher.GetValue(subkey, "Release");
-
-            string frameworkVersion = "";
+            string frameworkVersion;
 
             switch (int.Parse(releaseKeyString))
             {
