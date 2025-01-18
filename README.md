@@ -4,7 +4,6 @@
 OSCompatibilityLib adds .NET Standard 2.0 & 2.1 compatible ways of getting:
 * OS Detection by reimplementing the OperatingSystem class with static methods
 * Re-implementing the RuntimeInformation class to backport Runtime Identifier detection
-* Re-implementing the RuntimeEnvironment class
   
 It also adds some support for programmatically determining the .NET Target Framework Moniker (TFM) being used.
 
@@ -16,14 +15,14 @@ This can be easily done with a using namespace.
 To target only .NET Standard 2.0 use:
 ```csharp
 #if NETSTANDARD2_0
-    using OperatingSystem = AlastairLundy.OSCompatibilityLib.OperatingSystem;
+    using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 #endif
 ```
 
 To target .NET Standard 2.0 and 2.1 use:
 ```csharp
 #if NETSTANDARD2_0 || NETSTANDARD2_1
-    using OperatingSystem = AlastairLundy.OSCompatibilityLib.OperatingSystem;
+    using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 #endif
 ```
 
