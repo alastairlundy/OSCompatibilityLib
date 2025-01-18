@@ -16,9 +16,17 @@
         <AssemblyName>AlastairLundy.OSCompatibilityLib</AssemblyName>
         <RootNamespace>AlastairLundy.OSCompatibilityLib</RootNamespace>
         <PackageId>AlastairLundy.OSCompatibilityLib</PackageId>
-        <Copyright>Copyright (c) 2024 Alastair Lundy</Copyright>
+        <Copyright>Copyright (c) 2025 Alastair Lundy</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/OSCompatibilityLib/</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
+        <PackageReleaseNotes>### Changes since RuntimeExtensions 2.1.0
+* Changed package name to OSCompatibilityLib
+* Adjusted namespaces to reflect the new package name
+* Updated ``OperatingSystem`` polyfill class to be more useful
+* Added ``RuntimeInformation`` polyfill class
+* Moved Polyfills and Specializations to separate namespaces
+* Added ``WinRegistrySearcher`` Specialization class</PackageReleaseNotes>
+        <PackageTags>operating system, os, runtime information, runtime identifier,</PackageTags>
     </PropertyGroup>
 
     <ItemGroup>
@@ -63,6 +71,10 @@
         <Generator>ResXFileCodeGenerator</Generator>
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Specializations\Identification\Extensions\" />
     </ItemGroup>
     
 </Project>
