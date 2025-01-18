@@ -65,7 +65,7 @@ namespace AlastairLundy.OSCompatibilityLib.Specializations
         /// Returns the CPU architecture as a string in the format that a RuntimeID uses.
         /// </summary>
         /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException"></exception>
+        /// <exception cref="PlatformNotSupportedException">Thrown if run on an unsupported platform</exception>
         private static string GetArchitectureString()
         {
             switch (RuntimeInformation.OSArchitecture)
@@ -78,6 +78,16 @@ namespace AlastairLundy.OSCompatibilityLib.Specializations
                     return "x64";
                 case Architecture.X86:
                     return "x86";
+#if NET8_0_OR_GREATER
+                case Architecture.Wasm:
+                    return "wasm";
+                case Architecture.S390x:
+                    return "s390x";
+                case Architecture.Armv6:
+                    return "armv6";
+                case Architecture.Ppc64le:
+                    return "pc64le";
+#endif
                 default:
                     throw new PlatformNotSupportedException();
             }
@@ -270,7 +280,7 @@ namespace AlastairLundy.OSCompatibilityLib.Specializations
                 if (isAtLeastHighSierra)
                 {
                     
-                    if (OperatingSystem.IsMacOSVersionAtLeast(11, 0))
+                    if (OperatingSystem.IsMacOSVersionAtLeast(11))
                     {
                         osVersion = $"{version.Major}";
                     }
