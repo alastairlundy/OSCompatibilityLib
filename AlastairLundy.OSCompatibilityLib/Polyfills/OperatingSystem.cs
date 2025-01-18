@@ -334,7 +334,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
         /// <param name="minor">The minor release number.</param>
         /// <param name="build">The build release number.</param>
         /// <returns>true if the current application is running on an macOS version that is at least what was specified in the parameters; false otherwise.</returns>
-        public static bool IsMacOSVersionAtLeast(int major, int minor, int build = 0)
+        public static bool IsMacOSVersionAtLeast(int major, int minor = 0, int build = 0)
         {
             return IsMacOS() && GetMacOSVersion() >= new Version(major, minor, build);
         }
