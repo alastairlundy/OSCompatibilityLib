@@ -1,3 +1,8 @@
 OSCompatibilityLib makes use of some code from other open source projects/
 
-OSCompatibilityLib uses Microsoft's .NET 
+OSCompatibilityLib uses Microsoft's .NET API reference docs for code comments for Polyfill classes
+
+The .NET API reference docs are licensed under the Creative Commons 4.0 Attribution License:
+
+.NET Foundation, ".NET API Reference docs", GitHub, November 14 2023,
+ https://github.com/dotnet/dotnet-api-docs/. Accessed 18 January 2025. CC BY 4.0
