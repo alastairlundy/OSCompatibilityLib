@@ -29,7 +29,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-
+using System.Runtime.Versioning;
 using Architecture = System.Runtime.InteropServices.Architecture;
 using OSPlatform = System.Runtime.InteropServices.OSPlatform;
 
@@ -82,6 +82,17 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
         /// <summary>
         ///  Provides information about the .NET runtime installation.
         /// </summary>
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos")]
+        [SupportedOSPlatform("maccatalyst")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("freebsd")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [SupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("watchos")]
+#endif
         static RuntimeInformation()
         {
             GetArchitectureInfo();
@@ -98,15 +109,24 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
         {
             try
             {
-                return GetNewNewDescription();
+                return GetNewDotNetDescription();
             }
             catch
             {
-                return GetNetFrameworkDescription();
+                if (OperatingSystem.IsWindows())
+                {
+#pragma warning disable CA1416
+                    return GetNetFrameworkDescription();
+#pragma warning restore CA1416
+                }
+                else
+                {
+                    return $".NET CLR {Environment.Version}";
+                }
             }
         }
 
-        private static string GetNewNewDescription()
+        private static string GetNewDotNetDescription()
         {
             Process winProcess =
                 ProcessRunner.CreateProcess($"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe",
@@ -133,7 +153,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 
             bool releaseFound = Version.TryParse(release, out Version versionRelease);
 
-            if (releaseFound)
+            if (releaseFound == true && release != null)
             {
                 if (versionRelease.Major < 4)
                 {
@@ -156,6 +176,9 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
             return release;
         }
 
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]        
+#endif
         private static string GetNetFrameworkDescription()
         {
             const string subKey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
@@ -272,7 +295,18 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
         }
 
         #region Runtime Identifier code
-
+        
+#if NET5_0_OR_GREATER
+        [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macOS")]
+        [SupportedOSPlatform("maccatalyst")]
+        [SupportedOSPlatform("linux")]
+        [SupportedOSPlatform("freebsd")]
+        [SupportedOSPlatform("ios")]
+        [SupportedOSPlatform("android")]
+        [SupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("watchos")]
+#endif
         private static string GetRuntimeIdentifier()
         {
             if (OperatingSystem.IsWindows())
@@ -348,7 +382,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 
                 if (isAtLeastHighSierra)
                 {
-                    if (OperatingSystem.IsMacOSVersionAtLeast(11, 0))
+                    if (OperatingSystem.IsMacOSVersionAtLeast(11))
                     {
                         osVersion = $"{version.Major}";
                     }
