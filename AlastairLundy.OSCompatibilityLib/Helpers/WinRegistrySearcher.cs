@@ -26,8 +26,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-using AlastairLundy.OSCompatibilityLib.Helpers;
-
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
 // ReSharper disable ClassNeverInstantiated.Global
@@ -37,12 +35,12 @@ using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSyst
 using System.Runtime.Versioning;
 #endif
 
-namespace AlastairLundy.OSCompatibilityLib.Specializations.Windows
+namespace AlastairLundy.OSCompatibilityLib.Helpers
 {
     /// <summary>
     /// A class to make searching the Windows Registry easier.
     /// </summary>
-    public class WinRegistrySearcher
+    internal class WinRegistrySearcher
     {
         /// <summary>
         ///  Gets the value of a registry key in the Windows registry.
@@ -53,7 +51,7 @@ namespace AlastairLundy.OSCompatibilityLib.Specializations.Windows
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-        public static string GetValue(string query){
+        internal static string GetValue(string query){
             if (OperatingSystem.IsWindows())
             {
                 Process process = ProcessRunner.CreateProcess(
@@ -77,13 +75,13 @@ namespace AlastairLundy.OSCompatibilityLib.Specializations.Windows
         ///  Gets the value of a registry key in the Windows registry.
         /// </summary>
         /// <param name="query"></param>
-        /// <param name="value"></param>
+        /// <param name="key"></param>
         /// <returns></returns>
         /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
 #if NET5_0_OR_GREATER
     [SupportedOSPlatform("windows")]
 #endif
-        public static string GetValue(string query, string value){
+        internal static string GetValue(string query, string key){
             if (OperatingSystem.IsWindows())
             {
                 Process process = ProcessRunner.CreateProcess(
@@ -94,7 +92,7 @@ namespace AlastairLundy.OSCompatibilityLib.Specializations.Windows
 
                 if (result != null)
                 {
-                    return result.Replace(value, string.Empty)
+                    return result.Replace(key, string.Empty)
                         .Replace("REG_SZ", string.Empty);
                 }
 
