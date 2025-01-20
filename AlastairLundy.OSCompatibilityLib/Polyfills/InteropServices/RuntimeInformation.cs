@@ -39,7 +39,6 @@ using AlastairLundy.OSCompatibilityLib.Helpers;
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
 using AlastairLundy.OSCompatibilityLib.Specializations;
-using AlastairLundy.OSCompatibilityLib.Specializations.Windows;
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
 // ReSharper disable SuggestVarOrType_BuiltInTypes
