@@ -26,7 +26,7 @@ using System.Diagnostics;
 
 namespace AlastairLundy.OSCompatibilityLib.Helpers
 {
-    internal class ProcessRunner
+    internal static class ProcessRunner
     {
         internal static Process CreateProcess(string targetFileName, string arguments)
         {
