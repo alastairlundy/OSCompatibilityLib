@@ -55,7 +55,11 @@ namespace AlastairLundy.OSCompatibilityLib.Helpers
 
             process.WaitForExit();
 
-            return process.StandardOutput.ReadToEnd();
+            string output = process.StandardOutput.ReadToEnd();
+         
+            process.Close();
+            
+            return output;
         }
     }
 }
