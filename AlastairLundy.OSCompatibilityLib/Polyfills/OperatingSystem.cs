@@ -139,8 +139,10 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
 
                 return Version.Parse(versionString);
             }
-
-            throw new PlatformNotSupportedException(Resources.Exceptions_PlatformNotSupported_LinuxOnly);
+            else
+            {
+                return GetFallbackOsVersion();
+            }
         }
 
 
@@ -249,37 +251,65 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills
 
         private static Version GetWindowsVersion()
         {
-            return Version.Parse(RuntimeInformation.OSDescription
-                .Replace("Microsoft Windows", string.Empty)
-                .Replace(" ", string.Empty));
+            if (IsWindows())
+            {
+                return Version.Parse(RuntimeInformation.OSDescription
+                    .Replace("Microsoft Windows", string.Empty)
+                    .Replace(" ", string.Empty));
+            }
+            else
+            {
+                return GetFallbackOsVersion();
+            }
         }
 
         private static Version GetMacOSVersion()
         {
-            string versionString = ProcessRunner.RunProcess(
-                    ProcessRunner.CreateProcess("/usr/bin/sw_vers", ""))
-                .Replace("ProductVersion:", string.Empty)
-                .Replace(" ", string.Empty);
+            if (IsMacOS())
+            {
+                string versionString = ProcessRunner.RunProcess(
+                        ProcessRunner.CreateProcess("/usr/bin/sw_vers", ""))
+                    .Replace("ProductVersion:", string.Empty)
+                    .Replace(" ", string.Empty);
 
-            return Version.Parse(versionString.Split(Environment.NewLine.ToCharArray())[0]);
+                return Version.Parse(versionString.Split(Environment.NewLine.ToCharArray())[0]);
+            }
+            else
+            {
+                return GetFallbackOsVersion();
+            }
         }
 
         private static Version GetFreeBSDVersion()
         {
-            string versionString = Environment.OSVersion.VersionString
-                .Replace("Unix", string.Empty).Replace("FreeBSD", string.Empty)
-                .Replace("-release", string.Empty).Replace(" ", string.Empty);
+            if (IsFreeBSD())
+            {
+                string versionString = Environment.OSVersion.VersionString
+                    .Replace("Unix", string.Empty).Replace("FreeBSD", string.Empty)
+                    .Replace("-release", string.Empty).Replace(" ", string.Empty);
 
-            return Version.Parse(versionString);
+                return Version.Parse(versionString);
+            }
+            else
+            {
+                return GetFallbackOsVersion();
+            }
         }
 
         private static Version GetAndroidVersion()
         {
-            string result = ProcessRunner.RunProcess(
-                    ProcessRunner.CreateProcess("getprop", "ro.build.version.release"))
-                .Replace(" ", string.Empty);
+            if (IsAndroid())
+            {
+                string result = ProcessRunner.RunProcess(
+                        ProcessRunner.CreateProcess("getprop", "ro.build.version.release"))
+                    .Replace(" ", string.Empty);
 
-            return Version.Parse(result);
+                return Version.Parse(result);
+            }
+            else
+            {
+                return GetFallbackOsVersion();
+            }
         }
 
         /// <summary>
