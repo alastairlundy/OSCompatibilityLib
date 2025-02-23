@@ -25,10 +25,6 @@
         <PackageTags>operating system, os, runtime information, runtime identifier,</PackageTags>
         <Title>AlastairLundy.OSCompatibilityLib</Title>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
-    </ItemGroup>
     
     <ItemGroup>
         <Content Include="..\LICENSE.txt">
