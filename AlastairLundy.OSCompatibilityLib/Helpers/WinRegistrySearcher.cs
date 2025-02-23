@@ -25,6 +25,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
@@ -42,35 +43,6 @@ namespace AlastairLundy.OSCompatibilityLib.Helpers
     /// </summary>
     internal class WinRegistrySearcher
     {
-        /// <summary>
-        ///  Gets the value of a registry key in the Windows registry.
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        /// <exception cref="PlatformNotSupportedException">Thrown if run on an Operating System that isn't Windows.</exception>
-#if NET5_0_OR_GREATER
-    [SupportedOSPlatform("windows")]
-#endif
-        internal static string GetValue(string query){
-            if (OperatingSystem.IsWindows())
-            {
-                Process process = ProcessRunner.CreateProcess(
-                    $"{Environment.SystemDirectory}{Path.DirectorySeparatorChar}cmd.exe",
-                        $"REG QUERY {query}");
-            
-                string result = ProcessRunner.RunProcess(process);
-                    
-                if (result != null)
-                {
-                    return result.Replace("REG_SZ", string.Empty);
-                }
-
-                throw new ArgumentNullException();
-            }
-
-            throw new PlatformNotSupportedException();
-        }
-    
         /// <summary>
         ///  Gets the value of a registry key in the Windows registry.
         /// </summary>

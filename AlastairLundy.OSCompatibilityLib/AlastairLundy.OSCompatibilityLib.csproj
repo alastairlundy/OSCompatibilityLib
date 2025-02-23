@@ -69,10 +69,5 @@
         <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       </EmbeddedResource>
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Specializations\Identification\Extensions\" />
-      <Folder Include="Specializations\Windows\" />
-    </ItemGroup>
     
 </Project>
