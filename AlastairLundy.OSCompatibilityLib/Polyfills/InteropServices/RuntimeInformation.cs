@@ -31,7 +31,6 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.Versioning;
 
 using Architecture = System.Runtime.InteropServices.Architecture;
 using OSPlatform = System.Runtime.InteropServices.OSPlatform;
@@ -40,6 +39,12 @@ using AlastairLundy.OSCompatibilityLib.Helpers;
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
 using AlastairLundy.OSCompatibilityLib.Specializations;
+using Microsoft.Win32;
+
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+#endif
+
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
 // ReSharper disable SuggestVarOrType_BuiltInTypes
@@ -155,7 +160,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
 
             bool releaseFound = Version.TryParse(release, out Version versionRelease);
 
-            if (releaseFound == true && release != null)
+            if (releaseFound == true)
             {
                 if (versionRelease.Major < 4)
                 {
@@ -185,37 +190,54 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
         {
             const string subKey = @"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full\";
 
-            string releaseKeyString = WinRegistrySearcher.GetValue(subKey, "Release");
+            string releaseKeyString = string.Empty;
+            
+            using (RegistryKey key = Registry.CurrentUser.CreateSubKey(subKey))
+            {
+                if (key != null)
+                {
+                    releaseKeyString = (string)key.GetValue("Release", string.Empty);
+                }
+            }
 
             string frameworkVersion;
-
-            switch (int.Parse(releaseKeyString))
+            
+            if (releaseKeyString != null && releaseKeyString.Equals(string.Empty) == false)
             {
-                case 394254 | 394271:
-                    frameworkVersion = "4.6.1";
-                    break;
-                case 394802 | 394806:
-                    frameworkVersion = "4.6.2";
-                    break;
-                case 460798 | 460805:
-                    frameworkVersion = "4.7";
-                    break;
-                case 461308 | 461310:
-                    frameworkVersion = "4.7.1";
-                    break;
-                case 461808 | 461814:
-                    frameworkVersion = "4.7.2";
-                    break;
-                case 528040 | 528372 | 528449 | 528049:
-                    frameworkVersion = "4.8";
-                    break;
-                case 533320 | 533325:
-                    frameworkVersion = "4.8.1";
-                    break;
-                default:
-                    frameworkVersion = Environment.Version.ToString();
-                    break;
+               
+                switch (int.Parse(releaseKeyString))
+                {
+                    case 394254 | 394271:
+                        frameworkVersion = "4.6.1";
+                        break;
+                    case 394802 | 394806:
+                        frameworkVersion = "4.6.2";
+                        break;
+                    case 460798 | 460805:
+                        frameworkVersion = "4.7";
+                        break;
+                    case 461308 | 461310:
+                        frameworkVersion = "4.7.1";
+                        break;
+                    case 461808 | 461814:
+                        frameworkVersion = "4.7.2";
+                        break;
+                    case 528040 | 528372 | 528449 | 528049:
+                        frameworkVersion = "4.8";
+                        break;
+                    case 533320 | 533325:
+                        frameworkVersion = "4.8.1";
+                        break;
+                    default:
+                        frameworkVersion = Environment.Version.ToString();
+                        break;
+                }
             }
+            else
+            {
+                frameworkVersion = Environment.Version.ToString();
+            }
+
 
             return $".NET Framework {frameworkVersion}";
         }
