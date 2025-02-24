@@ -58,6 +58,7 @@ namespace AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices
     /// <summary>
     /// Provides information about the .NET runtime installation.
     /// </summary>
+    [Obsolete("This class is deprecated and will be removed in a future version.")]
     public static class RuntimeInformation
     {
         /// <summary>
