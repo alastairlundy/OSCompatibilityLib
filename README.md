@@ -1,4 +1,4 @@
-﻿# OSCompatibilityLib (formerly RuntimeExtensions)
+﻿# OSCompatibilityLib
 
 ## Features:
 OSCompatibilityLib adds .NET Standard 2.0 & 2.1 compatible ways of getting:
