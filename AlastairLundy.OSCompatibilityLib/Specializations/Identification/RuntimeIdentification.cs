@@ -44,13 +44,12 @@ using Architecture = System.Runtime.InteropServices.Architecture;
 
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
+using RuntimeInformation = System.Runtime.InteropServices.RuntimeInformation;
+
 #if NETSTANDARD2_0 || NETSTANDARD2_1
 using OperatingSystem = AlastairLundy.OSCompatibilityLib.Polyfills.OperatingSystem;
-using RuntimeInformation = AlastairLundy.OSCompatibilityLib.Polyfills.InteropServices.RuntimeInformation;
-//
 #else
 using OperatingSystem = System.OperatingSystem;
-using RuntimeInformation = System.Runtime.InteropServices.RuntimeInformation;
 #endif
 
 namespace AlastairLundy.OSCompatibilityLib.Specializations
