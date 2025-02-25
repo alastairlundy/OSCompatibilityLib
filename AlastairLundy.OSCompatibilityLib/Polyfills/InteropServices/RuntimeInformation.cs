@@ -39,6 +39,7 @@ using AlastairLundy.OSCompatibilityLib.Helpers;
 using AlastairLundy.OSCompatibilityLib.Internal.Localizations;
 
 using AlastairLundy.OSCompatibilityLib.Specializations;
+
 using Microsoft.Win32;
 
 #if NET5_0_OR_GREATER
