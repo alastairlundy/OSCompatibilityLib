@@ -6,7 +6,7 @@
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <PackageVersion>3.0.1</PackageVersion>
+        <PackageVersion>3.1.0</PackageVersion>
         <Description>Add OS detection support for Windows, macOS, Linux, and FreeBSD to .NET Stadard 2 projects and more.</Description>
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -16,12 +16,11 @@
         <AssemblyName>AlastairLundy.OSCompatibilityLib</AssemblyName>
         <RootNamespace>AlastairLundy.OSCompatibilityLib</RootNamespace>
         <PackageId>AlastairLundy.OSCompatibilityLib</PackageId>
-        <Copyright>Copyright (c) 2025 Alastair Lundy</Copyright>
+        <Copyright>Copyright (c) 2024-2025 Alastair Lundy</Copyright>
         <RepositoryUrl>https://github.com/alastairlundy/OSCompatibilityLib/</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <PackageReleaseNotes>### Changes since 3.0.0
-* Optimisations and Improvements
-* Improved compatibility of IsOsVersionAtLeast methods</PackageReleaseNotes>
+        <PackageReleaseNotes>### Changes since 3.0.1
+* Reduced technical debt by replacing internal ``WinRegistrySearcher`` helper code with dependency on ``Microsoft.Windows.Compatibility`` package.</PackageReleaseNotes>
         <PackageTags>operating system, os, runtime information, runtime identifier,</PackageTags>
         <Title>AlastairLundy.OSCompatibilityLib</Title>
     </PropertyGroup>
